@@ -2,6 +2,10 @@
 
 Este repositorio está desplegado en _Vercel_, usted puede comprobar el despliegue _[aquí](https://nalanda-challenge.vercel.app/)_.
 
+## Pending tasks
+
+https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
+
 ## Qué contiene la solución (TODO: explicar bien)
 
 1. Pre commit con husky laxo para mejorar la experiencia de desarrollo
