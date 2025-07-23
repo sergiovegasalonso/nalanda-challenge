@@ -8,3 +8,4 @@ Este repositorio está desplegado en _Vercel_, usted puede comprobar el desplieg
 2. eslint para mejorar la calidad del código
 3. Prettier para...
 4. Ejemplo de github action que ejecuta los tests en modo sin interfaz
+5. tailwind and daysiui for basic theming
