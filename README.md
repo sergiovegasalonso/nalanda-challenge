@@ -5,7 +5,7 @@ Este repositorio está desplegado en _Vercel_, usted puede comprobar el desplieg
 ## Pending tasks
 
 https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
-/* sonar-disable-next-line:at-rule-no-unknown */
+/_ sonar-disable-next-line:at-rule-no-unknown _/
 
 ## Qué contiene la solución (TODO: explicar bien)
 
