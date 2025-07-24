@@ -6,6 +6,8 @@ Este repositorio está desplegado en _Vercel_, usted puede comprobar el desplieg
 
 https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 /_ sonar-disable-next-line:at-rule-no-unknown _/
+* hacer que no fallen los not found, como en sergiovegasalonso.lab
+* tests de todo
 
 ## Qué contiene la solución (TODO: explicar bien)
 
@@ -15,3 +17,4 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 4. Ejemplo de github action que ejecuta los tests en modo sin interfaz con integración con vercel
 5. tailwind and daysiui for basic theming
 6. pagespeed
+7. revisar el router
