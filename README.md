@@ -19,3 +19,4 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 6. pagespeed todo al 100
 7. revisar el router
 8. Rutas relativas y absolutas explicación
+9. transfer stated problem with vercel
