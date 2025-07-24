@@ -16,6 +16,6 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 3. Prettier para...
 4. Ejemplo de github action que ejecuta los tests en modo sin interfaz con integración con vercel
 5. tailwind and daysiui for basic theming
-6. pagespeed
+6. pagespeed todo al 100
 7. revisar el router
 8. Rutas relativas y absolutas explicación
