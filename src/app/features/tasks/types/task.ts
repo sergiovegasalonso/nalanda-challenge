@@ -1,12 +1,12 @@
 import { Priority } from './priority.enum';
-import { State } from './state.enum';
+import { Status } from './status.enum';
 
 export interface Task {
   id: number;
   title: string;
   description: string;
   priority: Priority;
-  state: State;
+  status: Status;
   dependsOn?: number[];
   startedAt?: Date;
   completedAt?: Date;

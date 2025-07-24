@@ -17,26 +17,38 @@
         <th id="title">Title</th>
         <th id="description">Description</th>
         <th id="priority">Priority</th>
-        <th id="state">State</th>
+        <th id="status">Status</th>
         <th id="depends-on">Depends On</th>
         <th id="started-at">Started At</th>
         <th id="completed-at">Completed At</th>
       </tr>
     </thead>
     <tbody>
-      @for (task of tasks(); track task.id) {
+      @if (tasks$ | async; as tasks) {
+        @for (task of tasks; track task.id) {
+          <tr>
+            <td [id]="task.id">{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>
+              <div [class]="'badge ' + getBadgeClass(task.priority)">
+                {{ getPriorityNameByValue(task.priority) }}
+              </div>
+            </td>
+            <td>
+              <div class="badge badge-md badge-outline">
+                {{ getStatusNameByValue(task.status) }}
+              </div>
+            </td>
+            <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
+            <td>{{ task.startedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+            <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <td [id]="task.id">{{ task.id }}</td>
-          <td>{{ task.title }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.priority }}</td>
-          <td>{{ task.state }}</td>
-          <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
-          <td>{{ task.startedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
-          <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+          <td>There are no items.</td>
         </tr>
-      } @empty {
-        <div>There are no items.</div>
       }
     </tbody>
   </table>

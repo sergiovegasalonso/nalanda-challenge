@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Priority } from '../../types/priority.enum';
-import { State } from '../../types/state.enum';
+import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class TasksService {
       title: 'Title 1',
       description: 'Description for task 1',
       priority: Priority.High,
-      state: State.New,
+      status: Status.New,
       dependsOn: [2, 3],
       startedAt: undefined,
       completedAt: undefined,
@@ -24,7 +24,7 @@ export class TasksService {
       title: 'Title 2',
       description: 'Description for task 2',
       priority: Priority.Medium,
-      state: State.New,
+      status: Status.New,
       dependsOn: [],
       startedAt: undefined,
       completedAt: undefined,
@@ -34,7 +34,7 @@ export class TasksService {
       title: 'Title 3',
       description: 'Description for task 3',
       priority: Priority.Low,
-      state: State.New,
+      status: Status.New,
       dependsOn: [],
       startedAt: undefined,
       completedAt: undefined,
@@ -44,7 +44,7 @@ export class TasksService {
       title: 'Title 4',
       description: 'Description for task 4',
       priority: Priority.High,
-      state: State.New,
+      status: Status.New,
       dependsOn: [1, 2],
       startedAt: undefined,
       completedAt: undefined,
@@ -54,7 +54,7 @@ export class TasksService {
       title: 'Title 5',
       description: 'Description for task 5',
       priority: Priority.Medium,
-      state: State.New,
+      status: Status.New,
       dependsOn: [],
       startedAt: undefined,
       completedAt: undefined,
@@ -64,7 +64,7 @@ export class TasksService {
       title: 'Title 6',
       description: 'Description for task 6',
       priority: Priority.High,
-      state: State.New,
+      status: Status.New,
       dependsOn: [7],
       startedAt: undefined,
       completedAt: undefined,
@@ -74,7 +74,7 @@ export class TasksService {
       title: 'Title 7',
       description: 'Description for task 7',
       priority: Priority.Low,
-      state: State.New,
+      status: Status.New,
       dependsOn: [],
       startedAt: undefined,
       completedAt: undefined,
@@ -84,7 +84,7 @@ export class TasksService {
       title: 'Title 8',
       description: 'Description for task 8',
       priority: Priority.Medium,
-      state: State.New,
+      status: Status.New,
       dependsOn: [],
       startedAt: undefined,
       completedAt: undefined,
@@ -94,7 +94,7 @@ export class TasksService {
       title: 'Title 9',
       description: 'Description for task 9',
       priority: Priority.High,
-      state: State.New,
+      status: Status.New,
       dependsOn: [],
       startedAt: undefined,
       completedAt: undefined,
@@ -104,7 +104,7 @@ export class TasksService {
       title: 'Title 10',
       description: 'Description for task 10',
       priority: Priority.Low,
-      state: State.New,
+      status: Status.New,
       dependsOn: [8, 9],
       startedAt: undefined,
       completedAt: undefined,

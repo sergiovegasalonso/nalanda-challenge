@@ -1,5 +1,5 @@
 import { Priority } from '../../types/priority.enum';
-import { State } from '../../types/state.enum';
+import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
 import { TasksService } from './tasks';
 import { TestBed } from '@angular/core/testing';
@@ -35,7 +35,7 @@ describe('Tasks', () => {
       title: 'Title 1',
       description: 'Description for task 1',
       priority: Priority.High,
-      state: State.New,
+      status: Status.New,
       dependsOn: [2, 3],
       startedAt: undefined,
       completedAt: undefined,
@@ -53,10 +53,10 @@ describe('Tasks', () => {
 
   it('should return tasks with valid states', async () => {
     const tasks = await firstValueFrom(service.getAllTasks());
-    const validStates = Object.values(State);
+    const validStatuses = Object.values(Status);
 
     tasks.forEach((task: Task) => {
-      expect(validStates).toContain(task.state);
+      expect(validStatuses).toContain(task.status);
     });
   });
 });
