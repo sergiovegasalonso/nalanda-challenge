@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Task } from '../../types/task';
+import { Injectable } from '@angular/core';
 import { Priority } from '../../types/priority.enum';
 import { State } from '../../types/state.enum';
+import { Task } from '../../types/task';
 
 @Injectable({
   providedIn: 'root',

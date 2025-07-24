@@ -18,3 +18,4 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 5. tailwind and daysiui for basic theming
 6. pagespeed
 7. revisar el router
+8. Rutas relativas y absolutas explicación

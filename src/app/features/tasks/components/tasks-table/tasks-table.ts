@@ -7,9 +7,9 @@ import {
   makeStateKey,
   signal,
 } from '@angular/core';
-import { TasksService } from '../../services/tasks/tasks';
-import { Task } from '../../types/task';
 import { DatePipe, isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Task } from '../../types/task';
+import { TasksService } from '../../services/tasks/tasks';
 
 const tasksKey = makeStateKey<Task[]>('tasksKey');
 

@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { TasksService } from './tasks';
-import { Task } from '../../types/task';
 import { Priority } from '../../types/priority.enum';
 import { State } from '../../types/state.enum';
+import { Task } from '../../types/task';
+import { TasksService } from './tasks';
+import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
 import { provideZonelessChangeDetection } from '@angular/core';
 
