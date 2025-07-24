@@ -8,11 +8,6 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'tasks',
-    redirectTo: 'tasks/task-manager',
-    pathMatch: 'full',
-  },
-  {
     path: 'tasks/task-manager',
     title: 'Nalanda Challenge - Task Manager',
     loadComponent: () =>
