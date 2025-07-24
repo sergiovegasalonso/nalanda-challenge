@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PageNotFound } from './page-not-found';
+import { Heading1 } from './heading-1';
 import { provideZonelessChangeDetection } from '@angular/core';
 
-describe('PageNotFound', () => {
-  let component: PageNotFound;
-  let fixture: ComponentFixture<PageNotFound>;
+describe('Heading1', () => {
+  let component: Heading1;
+  let fixture: ComponentFixture<Heading1>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [provideZonelessChangeDetection()],
-      imports: [PageNotFound],
+      imports: [Heading1],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PageNotFound);
+    fixture = TestBed.createComponent(Heading1);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

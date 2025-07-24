@@ -1,31 +1,44 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th id="id">Id</th>
-      <th id="title">Title</th>
-      <th id="description">Description</th>
-      <th id="priority">Priority</th>
-      <th id="state">State</th>
-      <th id="depends-on">Depends On</th>
-      <th id="started-at">Started At</th>
-      <th id="completed-at">Completed At</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (task of tasks(); track task.id) {
+@if (loading()) {
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+  <div class="skeleton h-16 w-full"></div>
+} @else {
+  <table class="table">
+    <thead>
       <tr>
-        <td [id]="task.id">{{ task.id }}</td>
-        <td>{{ task.id }}</td>
-        <td>{{ task.title }}</td>
-        <td>{{ task.description }}</td>
-        <td>{{ task.priority }}</td>
-        <td>{{ task.state }}</td>
-        <td>{{ task.dependsOn }}</td>
-        <td>{{ task.startedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
-        <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+        <th id="id">Id</th>
+        <th id="title">Title</th>
+        <th id="description">Description</th>
+        <th id="priority">Priority</th>
+        <th id="state">State</th>
+        <th id="depends-on">Depends On</th>
+        <th id="started-at">Started At</th>
+        <th id="completed-at">Completed At</th>
       </tr>
-    } @empty {
-      <div>There are no items.</div>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @for (task of tasks(); track task.id) {
+        <tr>
+          <td [id]="task.id">{{ task.id }}</td>
+          <td>{{ task.id }}</td>
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.state }}</td>
+          <td>{{ task.dependsOn }}</td>
+          <td>{{ task.startedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+          <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+        </tr>
+      } @empty {
+        <div>There are no items.</div>
+      }
+    </tbody>
+  </table>
+}

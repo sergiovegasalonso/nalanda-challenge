@@ -1,7 +1,17 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  inject,
+  makeStateKey,
+  signal,
+} from '@angular/core';
 import { TasksService } from '../../services/tasks/tasks';
 import { Task } from '../../types/task';
-import { DatePipe } from '@angular/common';
+import { DatePipe, isPlatformBrowser, isPlatformServer } from '@angular/common';
+
+const tasksKey = makeStateKey<Task[]>('tasksKey');
 
 @Component({
   selector: 'nlnd-tasks-table',
@@ -11,18 +21,30 @@ import { DatePipe } from '@angular/common';
   styleUrl: './tasks-table.css',
 })
 export class TasksTable implements OnInit {
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly tasksService = inject(TasksService);
+  private readonly transferState = inject(TransferState);
 
   tasks = signal<Task[]>([]);
+  loading = signal(false);
 
   ngOnInit() {
-    this.getTasks();
+    if (isPlatformServer(this.platformId)) {
+      this.getTasks();
+    } else if (isPlatformBrowser(this.platformId)) {
+      this.tasks.set(this.transferState.get<Task[]>(tasksKey, []));
+    }
   }
 
   getTasks() {
-    return this.tasksService.getAllTasks().subscribe({
+    this.loading.set(true);
+    this.tasksService.getAllTasks().subscribe({
       next: (tasks) => {
         this.tasks.set(tasks);
+        this.loading.set(false);
+        if (isPlatformServer(this.platformId)) {
+          this.transferState.set(tasksKey, tasks);
+        }
       },
       error: (error) => {
         console.error('Error fetching tasks:', error);

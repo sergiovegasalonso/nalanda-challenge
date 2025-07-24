@@ -7,7 +7,7 @@ Este repositorio está desplegado en _Vercel_, usted puede comprobar el desplieg
 https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 /_ sonar-disable-next-line:at-rule-no-unknown _/
 * hacer que no fallen los not found, como en sergiovegasalonso.lab
-* tests de todo
+* tests de todo y unificar criterio
 
 ## Qué contiene la solución (TODO: explicar bien)
 

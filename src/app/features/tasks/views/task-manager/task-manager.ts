@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { TasksTable } from '../../components/tasks-table/tasks-table';
+import { BreakLine } from '@app/shared/components/spacing/break-line/break-line';
+import { Heading1 } from '@app/shared/components/headings/heading-1/heading-1';
 
 @Component({
   selector: 'nlnd-task-manager',
   standalone: true,
-  imports: [TasksTable],
+  imports: [TasksTable, BreakLine, Heading1],
   templateUrl: './task-manager.html',
   styleUrl: './task-manager.css',
 })
