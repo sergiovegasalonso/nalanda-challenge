@@ -27,12 +27,11 @@
       @for (task of tasks(); track task.id) {
         <tr>
           <td [id]="task.id">{{ task.id }}</td>
-          <td>{{ task.id }}</td>
           <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
           <td>{{ task.priority }}</td>
           <td>{{ task.state }}</td>
-          <td>{{ task.dependsOn }}</td>
+          <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
           <td>{{ task.startedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
           <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
         </tr>

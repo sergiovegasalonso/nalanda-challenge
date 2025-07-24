@@ -36,6 +36,11 @@ export class TasksTable implements OnInit {
     }
   }
 
+  getRelatedTaskNames(dependsOn: number[] | undefined): string {
+    if (!dependsOn?.length) return '';
+    return dependsOn.map((id) => this.getTaskNameById(id)).join(', ');
+  }
+
   getTasks() {
     this.loading.set(true);
     this.tasksService.getAllTasks().subscribe({
@@ -50,5 +55,10 @@ export class TasksTable implements OnInit {
         console.error('Error fetching tasks:', error);
       },
     });
+  }
+
+  getTaskNameById(id: number): string {
+    const task = this.tasks().find((t) => t.id === id);
+    return task ? `#${task.title}` : '';
   }
 }
