@@ -8,6 +8,6 @@ export interface Task {
   priority: Priority;
   status: Status;
   dependsOn?: number[];
-  startedAt?: Date;
+  startAt?: Date;
   completedAt?: Date;
 }

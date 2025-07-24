@@ -16,7 +16,7 @@ export class TasksService {
       priority: Priority.High,
       status: Status.New,
       dependsOn: [2, 3],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -26,7 +26,7 @@ export class TasksService {
       priority: Priority.Medium,
       status: Status.New,
       dependsOn: [],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -36,7 +36,7 @@ export class TasksService {
       priority: Priority.Low,
       status: Status.New,
       dependsOn: [],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -46,7 +46,7 @@ export class TasksService {
       priority: Priority.High,
       status: Status.New,
       dependsOn: [1, 2],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -56,7 +56,7 @@ export class TasksService {
       priority: Priority.Medium,
       status: Status.New,
       dependsOn: [],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -66,7 +66,7 @@ export class TasksService {
       priority: Priority.High,
       status: Status.New,
       dependsOn: [7],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -76,7 +76,7 @@ export class TasksService {
       priority: Priority.Low,
       status: Status.New,
       dependsOn: [],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -86,7 +86,7 @@ export class TasksService {
       priority: Priority.Medium,
       status: Status.New,
       dependsOn: [],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -96,7 +96,7 @@ export class TasksService {
       priority: Priority.High,
       status: Status.New,
       dependsOn: [],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
     {
@@ -106,7 +106,7 @@ export class TasksService {
       priority: Priority.Low,
       status: Status.New,
       dependsOn: [8, 9],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     },
   ];

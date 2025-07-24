@@ -37,7 +37,7 @@ describe('Tasks', () => {
       priority: Priority.High,
       status: Status.New,
       dependsOn: [2, 3],
-      startedAt: undefined,
+      startAt: undefined,
       completedAt: undefined,
     });
   });

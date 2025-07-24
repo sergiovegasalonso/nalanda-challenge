@@ -1,14 +1,5 @@
 @if (loading()) {
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
-  <div class="skeleton h-16 w-full"></div>
+  <nlnd-loader />
 } @else {
   <table class="table">
     <thead>
@@ -26,7 +17,10 @@
     <tbody>
       @if (tasks$ | async; as tasks) {
         @for (task of tasks; track task.id) {
-          <tr>
+          <tr
+            (dblclick)="startTaskEdition(task)"
+            class="hover:bg-base-200 cursor-pointer"
+          >
             <td [id]="task.id">{{ task.id }}</td>
             <td>{{ task.title }}</td>
             <td>{{ task.description }}</td>
@@ -41,7 +35,7 @@
               </div>
             </td>
             <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
-            <td>{{ task.startedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+            <td>{{ task.startAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
             <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
           </tr>
         }
@@ -53,3 +47,20 @@
     </tbody>
   </table>
 }
+
+<dialog #modal id="modal" class="modal">
+  <div class="modal-box">
+    <nlnd-heading-2>{{ taskToEdit()?.title }}</nlnd-heading-2>
+    <nlnd-paragraph>Insert startAt date:</nlnd-paragraph>
+    <nlnd-break-line />
+    <input type="date" [(ngModel)]="startAtDate" />
+    <div class="modal-action">
+      <form method="dialog" class="w-full flex justify-between">
+        <button class="btn btn-primary" (click)="submitTaskEdition()">
+          Save
+        </button>
+        <button class="btn" (click)="cancelTaskEdition()">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

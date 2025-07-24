@@ -1,6 +1,19 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
+import { BreakLine } from '@app/shared/components/spacing/break-line/break-line';
+import { FormsModule } from '@angular/forms';
+import { Heading2 } from '@app/shared/components/headings/heading-2/heading-2';
+import { Loader } from '@app/shared/components/loader/loader';
+import { Paragraph } from '@app/shared/components/paragraph/paragraph';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
@@ -18,19 +31,30 @@ export interface SystemAlert {
 @Component({
   selector: 'nlnd-tasks-table',
   standalone: true,
-  imports: [AsyncPipe, DatePipe],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    Loader,
+    FormsModule,
+    Heading2,
+    Paragraph,
+    BreakLine,
+  ],
   templateUrl: './tasks-table.html',
-  styleUrl: './tasks-table.css',
 })
 export class TasksTable implements OnInit, OnDestroy {
+  @ViewChild('modal') modal!: ElementRef<HTMLDialogElement>;
+
   private readonly destroy$ = new Subject<void>();
   private readonly tasksService = inject(TasksService);
   private readonly tasksSubject = new BehaviorSubject<Task[]>([]);
 
-  loading = signal(false);
+  loading = signal<boolean>(false);
   Status = Status;
   Priority = Priority;
+  startAtDate: string | null = null;
   tasks$ = this.tasksSubject.asObservable();
+  taskToEdit = signal<Task | null>(null);
 
   ngOnInit() {
     this.getTasks();
@@ -40,6 +64,43 @@ export class TasksTable implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  cancelTaskEdition(): void {
+    this.taskToEdit.set(null);
+    this.startAtDate = null;
+    this.closeModal();
+  }
+
+  closeModal(): void {
+    this.modal.nativeElement.close();
+  }
+
+  submitTaskEdition(): void {
+    console.log(this.startAtDate);
+    console.log(this.taskToEdit());
+    if (!this.taskToEdit() || !this.startAtDate) {
+      this.closeModal();
+      return;
+    }
+
+    const updatedTask = {
+      ...this.taskToEdit()!,
+      startAt: new Date(this.startAtDate),
+    };
+
+    const currentTasks = this.tasksSubject.value;
+    const taskIndex = currentTasks.findIndex((t) => t.id === updatedTask.id);
+
+    if (taskIndex !== -1) {
+      const updatedTasks = [...currentTasks];
+      updatedTasks[taskIndex] = updatedTask;
+      this.tasksSubject.next(updatedTasks);
+    }
+
+    this.taskToEdit.set(null);
+    this.startAtDate = null;
+    this.closeModal();
   }
 
   getBadgeClass(priority: number): string {
@@ -84,6 +145,15 @@ export class TasksTable implements OnInit, OnDestroy {
   getTaskNameById(id: number): string {
     const task = this.tasksSubject.value.find((t) => t.id === id);
     return task ? `#${task.title}` : '';
+  }
+
+  openModal(): void {
+    this.modal.nativeElement.showModal();
+  }
+
+  startTaskEdition(task: Task): void {
+    this.taskToEdit.set(task);
+    this.openModal();
   }
 
   subscribeToTasks() {

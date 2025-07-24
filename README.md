@@ -8,6 +8,8 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 /_ sonar-disable-next-line:at-rule-no-unknown _/
 * hacer que no fallen los not found, como en sergiovegasalonso.lab
 * tests de todo y unificar criterio
+* refactorizar todo
+* in progress
 
 ## Qué contiene la solución (TODO: explicar bien)
 
@@ -20,3 +22,4 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 7. revisar el router
 8. Rutas relativas y absolutas explicación
 9. transfer stated problem with vercel
+
