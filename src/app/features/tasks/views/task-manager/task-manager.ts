@@ -8,6 +8,5 @@ import { TasksTable } from '../../components/tasks-table/tasks-table';
   standalone: true,
   imports: [TasksTable, BreakLine, Heading1],
   templateUrl: './task-manager.html',
-  styleUrl: './task-manager.css',
 })
 export class TaskManager {}
