@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./features/tasks/tasks-routing-module').then(
+      import('@features/tasks/tasks-routing-module').then(
         (m) => m.TasksRoutingModule,
       ),
   },

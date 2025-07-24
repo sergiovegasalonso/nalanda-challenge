@@ -8,8 +8,8 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '',
-    redirectTo: 'tasks',
+    path: 'tasks',
+    redirectTo: 'tasks/task-manager',
     pathMatch: 'full',
   },
   {
