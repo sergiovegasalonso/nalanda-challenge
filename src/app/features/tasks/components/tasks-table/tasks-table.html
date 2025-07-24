@@ -51,15 +51,18 @@
 <dialog #modal id="modal" class="modal">
   <div class="modal-box">
     <nlnd-heading-2>{{ taskToEdit()?.title }}</nlnd-heading-2>
+    <nlnd-break-line />
     <nlnd-paragraph>Insert startAt date:</nlnd-paragraph>
     <nlnd-break-line />
     <input type="date" [(ngModel)]="startAtDate" />
     <div class="modal-action">
       <form method="dialog" class="w-full flex justify-between">
-        <button class="btn btn-primary" (click)="submitTaskEdition()">
+        <nlnd-button buttonType="btn-primary" (click)="submitTaskEdition()">
           Save
-        </button>
-        <button class="btn" (click)="cancelTaskEdition()">Close</button>
+        </nlnd-button>
+        <nlnd-button buttonType="btn-secondary" (click)="cancelTaskEdition()">
+          Cancel
+        </nlnd-button>
       </form>
     </div>
   </div>

@@ -10,6 +10,7 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 * tests de todo y unificar criterio
 * refactorizar todo
 * in progress
+* <!-- TODO: Replace with nlnd-date-input -->
 
 ## Qué contiene la solución (TODO: explicar bien)
 

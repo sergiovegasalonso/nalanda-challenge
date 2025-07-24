@@ -9,16 +9,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { BreakLine } from '@app/shared/components/spacing/break-line/break-line';
+import { BreakLine } from '@shared/components/spacing/break-line/break-line';
+import { Button } from '@shared/components/buttons/button/button';
 import { FormsModule } from '@angular/forms';
-import { Heading2 } from '@app/shared/components/headings/heading-2/heading-2';
-import { Loader } from '@app/shared/components/loader/loader';
-import { Paragraph } from '@app/shared/components/paragraph/paragraph';
+import { Heading2 } from '@shared/components/headings/heading-2/heading-2';
+import { Loader } from '@shared/components/loader/loader';
+import { Paragraph } from '@shared/components/paragraph/paragraph';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
 import { TasksService } from '../../services/tasks/tasks';
-import { getEnumNameByValue } from '@app/shared/helpers/get-enum-name-by-value';
+import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
 
 export type AlertType = 'BLOCKED_TASK' | 'HIGH_PRIORITY' | 'INACTIVE';
 
@@ -39,6 +40,7 @@ export interface SystemAlert {
     Heading2,
     Paragraph,
     BreakLine,
+    Button,
   ],
   templateUrl: './tasks-table.html',
 })
