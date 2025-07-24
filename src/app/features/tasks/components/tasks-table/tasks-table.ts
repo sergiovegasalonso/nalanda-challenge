@@ -4,14 +4,11 @@ import {
   PLATFORM_ID,
   TransferState,
   inject,
-  makeStateKey,
   signal,
 } from '@angular/core';
-import { DatePipe, isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Task } from '../../types/task';
 import { TasksService } from '../../services/tasks/tasks';
-
-const tasksKey = makeStateKey<Task[]>('tasksKey');
 
 @Component({
   selector: 'nlnd-tasks-table',
@@ -29,11 +26,7 @@ export class TasksTable implements OnInit {
   loading = signal(false);
 
   ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
-      this.getTasks();
-    } else if (isPlatformBrowser(this.platformId)) {
-      this.tasks.set(this.transferState.get<Task[]>(tasksKey, []));
-    }
+    this.getTasks();
   }
 
   getRelatedTaskNames(dependsOn: number[] | undefined): string {
@@ -47,9 +40,6 @@ export class TasksTable implements OnInit {
       next: (tasks) => {
         this.tasks.set(tasks);
         this.loading.set(false);
-        if (isPlatformServer(this.platformId)) {
-          this.transferState.set(tasksKey, tasks);
-        }
       },
       error: (error) => {
         console.error('Error fetching tasks:', error);
