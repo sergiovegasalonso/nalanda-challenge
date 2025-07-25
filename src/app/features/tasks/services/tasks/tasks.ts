@@ -9,6 +9,12 @@ import { Task } from '../../types/task';
   providedIn: 'root',
 })
 export class TasksService {
+  private readonly MAX_CONCURRENT_TASKS = 3;
+  private readonly MAX_TASK_ATTEMPTS = 3;
+  private readonly MAX_TASK_DURATION = 14000;
+  private readonly MIN_TASK_DURATION = 1000;
+  private readonly MAX_TASKS = 10;
+
   private readonly cancellationSubjects = new Map<number, Subject<void>>();
 
   private readonly mockTasks: Task[] = [
@@ -162,32 +168,30 @@ export class TasksService {
   cancelTask(taskId: number): Observable<Task> {
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
-    if (taskIndex !== -1) {
-      const task = this.mockTasks[taskIndex];
-
-      // Only allow cancellation if task is in progress
-      if (task.status !== Status.InProgress) {
-        throw new Error('Only tasks in progress can be cancelled');
-      }
-
-      // Cancel the ongoing execution if exists
-      const cancellationSubject = this.cancellationSubjects.get(taskId);
-      if (cancellationSubject) {
-        cancellationSubject.next();
-        cancellationSubject.complete();
-        this.cancellationSubjects.delete(taskId);
-      }
-
-      const cancelledTask = {
-        ...task,
-        status: Status.Cancelled,
-      };
-
-      this.mockTasks[taskIndex] = cancelledTask;
-      return of(cancelledTask);
+    if (taskIndex === -1) {
+      return throwError(() => new Error('Task not found'));
     }
 
-    throw new Error('Task not found');
+    const task = this.mockTasks[taskIndex];
+
+    if (task.status !== Status.InProgress) {
+      throw new Error('Only tasks in progress can be cancelled');
+    }
+
+    const cancellationSubject = this.cancellationSubjects.get(taskId);
+    if (cancellationSubject) {
+      cancellationSubject.next();
+      cancellationSubject.complete();
+      this.cancellationSubjects.delete(taskId);
+    }
+
+    const cancelledTask = {
+      ...task,
+      status: Status.Cancelled,
+    };
+
+    this.mockTasks[taskIndex] = cancelledTask;
+    return of(cancelledTask);
   }
 
   getAllTasks(): Observable<Task[]> {
@@ -195,10 +199,10 @@ export class TasksService {
   }
 
   restartTask(taskId: number): Observable<Task> {
-    // Check if there are already 3 tasks running concurrently
     const runningTasks = this.mockTasks.filter(
       (t) => t.status === Status.InProgress,
     );
+
     if (runningTasks.length >= 3) {
       return throwError(
         () => new Error('Maximum of 3 tasks can run concurrently'),
@@ -207,23 +211,22 @@ export class TasksService {
 
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
-    if (taskIndex !== -1) {
-      const task = this.mockTasks[taskIndex];
-
-      const restartedTask = {
-        ...task,
-        status: Status.InProgress,
-      };
-
-      this.mockTasks[taskIndex] = restartedTask;
-      return of(restartedTask);
+    if (taskIndex === -1) {
+      return throwError(() => new Error('Task not found'));
     }
 
-    throw new Error('Task not found');
+    const task = this.mockTasks[taskIndex];
+
+    const restartedTask = {
+      ...task,
+      status: Status.InProgress,
+    };
+
+    this.mockTasks[taskIndex] = restartedTask;
+    return of(restartedTask);
   }
 
   simulateTaskExecution(taskId: number): Observable<Task> {
-    console.warn('Simulating task execution for task ID:', taskId);
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
     if (taskIndex === -1) {
@@ -283,8 +286,8 @@ export class TasksService {
             attempts: inProgressTask.attempts + 1,
           };
 
-          if (failedTask.attempts >= 3) {
-            failedTask.blockREason = 'Task execution failed after 3 attempts';
+          if (failedTask.attempts >= this.MAX_TASK_ATTEMPTS) {
+            failedTask.blockReason = 'Task execution failed after 3 attempts';
           }
 
           this.mockTasks[taskIndex] = failedTask;
@@ -307,26 +310,26 @@ export class TasksService {
   updateTask(updatedTask: Task): Observable<Task> {
     const taskIndex = this.mockTasks.findIndex((t) => t.id === updatedTask.id);
 
-    if (taskIndex !== -1) {
-      const taskToUpdate = { ...updatedTask };
-      if (taskToUpdate.startAt && taskToUpdate.startAt < new Date()) {
-        // Check if there are already 3 tasks running concurrently
-        const runningTasks = this.mockTasks.filter(
-          (t) => t.status === Status.InProgress,
-        );
-        if (runningTasks.length >= 3) {
-          return throwError(
-            () => new Error('Maximum of 3 tasks can run concurrently'),
-          );
-        }
-
-        taskToUpdate.status = Status.InProgress;
-      }
-
-      this.mockTasks[taskIndex] = taskToUpdate;
-      return of(taskToUpdate);
+    if (taskIndex === -1) {
+      return throwError(() => new Error('Task not found'));
     }
 
-    throw new Error('Task not found');
+    const taskToUpdate = { ...updatedTask };
+    if (taskToUpdate.startAt && taskToUpdate.startAt < new Date()) {
+      // Check if there are already 3 tasks running concurrently
+      const runningTasks = this.mockTasks.filter(
+        (t) => t.status === Status.InProgress,
+      );
+      if (runningTasks.length >= 3) {
+        return throwError(
+          () => new Error('Maximum of 3 tasks can run concurrently'),
+        );
+      }
+
+      taskToUpdate.status = Status.InProgress;
+    }
+
+    this.mockTasks[taskIndex] = taskToUpdate;
+    return of(taskToUpdate);
   }
 }

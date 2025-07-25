@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArrowPathIcon } from './arrow-path-icon';
+import { provideZonelessChangeDetection } from '@angular/core';
 
-import { ArrowPath } from './arrow-path-icon';
-
-describe('ArrowPath', () => {
-  let component: ArrowPath;
-  let fixture: ComponentFixture<ArrowPath>;
+describe('ArrowPathIcon', () => {
+  let component: ArrowPathIcon;
+  let fixture: ComponentFixture<ArrowPathIcon>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArrowPath],
+      providers: [provideZonelessChangeDetection()],
+      imports: [ArrowPathIcon],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ArrowPath);
+    fixture = TestBed.createComponent(ArrowPathIcon);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

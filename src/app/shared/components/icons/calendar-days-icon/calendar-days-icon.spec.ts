@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CalendarDaysIcon } from './calendar-days-icon';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CalendarDaysIcon', () => {
   let component: CalendarDaysIcon;
@@ -8,6 +8,7 @@ describe('CalendarDaysIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [CalendarDaysIcon],
     }).compileComponents();
 

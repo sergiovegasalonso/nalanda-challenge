@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DateInput } from './date-input';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('DateInput', () => {
   let component: DateInput;
@@ -8,6 +8,7 @@ describe('DateInput', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [DateInput],
     }).compileComponents();
 

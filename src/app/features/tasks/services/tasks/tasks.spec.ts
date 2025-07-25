@@ -39,6 +39,8 @@ describe('Tasks', () => {
       dependsOn: [2, 3],
       startAt: undefined,
       completedAt: undefined,
+      duration: 7000,
+      attempts: 0,
     });
   });
 

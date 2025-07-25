@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InfoIcon } from './info-icon';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('InfoIcon', () => {
   let component: InfoIcon;
@@ -8,6 +8,7 @@ describe('InfoIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [InfoIcon],
     }).compileComponents();
 

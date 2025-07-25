@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CheckBadgeIcon } from './check-badge-icon';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CheckBadgeIcon', () => {
   let component: CheckBadgeIcon;
@@ -8,6 +8,7 @@ describe('CheckBadgeIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [CheckBadgeIcon],
     }).compileComponents();
 

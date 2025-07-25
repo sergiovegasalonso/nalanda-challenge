@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ExclamationTringleIcon } from './exclamation-tringle-icon';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ExclamationTringleIcon', () => {
   let component: ExclamationTringleIcon;
@@ -8,6 +8,7 @@ describe('ExclamationTringleIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [ExclamationTringleIcon],
     }).compileComponents();
 

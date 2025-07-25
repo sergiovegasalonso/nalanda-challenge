@@ -53,7 +53,7 @@
             <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
             <td>{{ task.startAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
             <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
-            <td>{{ task.blockREason }}</td>
+            <td>{{ task.blockReason }}</td>
             <td>
               <nlnd-button
                 [buttonType]="ButtonType.Primary"

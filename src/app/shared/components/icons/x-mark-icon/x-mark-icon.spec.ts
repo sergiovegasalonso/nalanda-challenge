@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { XMarkIcon } from './x-mark-icon';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('XMarkIcon', () => {
   let component: XMarkIcon;
@@ -8,6 +8,7 @@ describe('XMarkIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [XMarkIcon],
     }).compileComponents();
 

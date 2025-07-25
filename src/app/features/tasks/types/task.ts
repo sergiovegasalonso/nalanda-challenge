@@ -12,5 +12,5 @@ export interface Task {
   completedAt?: Date;
   duration?: number;
   attempts: number;
-  blockREason?: string;
+  blockReason?: string;
 }
