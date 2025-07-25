@@ -13,7 +13,6 @@ export class TasksService {
   private readonly MAX_TASK_ATTEMPTS = 3;
   private readonly MAX_TASK_DURATION = 14000;
   private readonly MIN_TASK_DURATION = 1000;
-  private readonly MAX_TASKS = 10;
 
   private readonly cancellationSubjects = new Map<number, Subject<void>>();
 
@@ -162,6 +161,7 @@ export class TasksService {
     };
 
     this.mockTasks.push(randomTask);
+
     return of(randomTask);
   }
 
@@ -203,9 +203,12 @@ export class TasksService {
       (t) => t.status === Status.InProgress,
     );
 
-    if (runningTasks.length >= 3) {
+    if (runningTasks.length >= this.MAX_CONCURRENT_TASKS) {
       return throwError(
-        () => new Error('Maximum of 3 tasks can run concurrently'),
+        () =>
+          new Error(
+            `Maximum of ${this.MAX_CONCURRENT_TASKS} tasks can run concurrently`,
+          ),
       );
     }
 
@@ -223,6 +226,7 @@ export class TasksService {
     };
 
     this.mockTasks[taskIndex] = restartedTask;
+
     return of(restartedTask);
   }
 
@@ -242,27 +246,21 @@ export class TasksService {
     };
     this.mockTasks[taskIndex] = inProgressTask;
 
-    // Create cancellation subject for this task
     const cancellationSubject = new Subject<void>();
     this.cancellationSubjects.set(taskId, cancellationSubject);
 
-    // Generate random delay between 1 and 14 seconds
-    const delay = Math.floor(Math.random() * 14000) + 1000;
-
-    // Check if task should fail due to timeout (delay is double of task duration)
+    const delay =
+      Math.floor(Math.random() * this.MAX_TASK_DURATION) +
+      this.MIN_TASK_DURATION;
     const shouldFailDueToTimeout = delay > (task.duration || 0) * 2;
-
-    // Check if task should fail randomly (20% chance)
     const shouldFailRandomly = Math.random() < 0.2;
 
     return timer(delay).pipe(
       takeUntil(cancellationSubject),
       switchMap(() => {
-        // Clean up cancellation subject
         this.cancellationSubjects.delete(taskId);
 
         if (shouldFailDueToTimeout) {
-          // Update task status to failed due to timeout
           const failedTask = {
             ...task,
             status: Status.Blocked,
@@ -278,7 +276,6 @@ export class TasksService {
         }
 
         if (shouldFailRandomly) {
-          // Update task status to failed randomly
           const failedTask = {
             ...task,
             status: Status.Failed,
@@ -294,7 +291,6 @@ export class TasksService {
           return throwError(() => new Error('Task execution failed randomly'));
         }
 
-        // Update task status to completed
         const completedTask = {
           ...task,
           status: Status.Completed,
@@ -302,6 +298,7 @@ export class TasksService {
           completedAt: new Date(),
         };
         this.mockTasks[taskIndex] = completedTask;
+
         return of(completedTask);
       }),
     );
@@ -316,13 +313,15 @@ export class TasksService {
 
     const taskToUpdate = { ...updatedTask };
     if (taskToUpdate.startAt && taskToUpdate.startAt < new Date()) {
-      // Check if there are already 3 tasks running concurrently
       const runningTasks = this.mockTasks.filter(
         (t) => t.status === Status.InProgress,
       );
-      if (runningTasks.length >= 3) {
+      if (runningTasks.length >= this.MAX_CONCURRENT_TASKS) {
         return throwError(
-          () => new Error('Maximum of 3 tasks can run concurrently'),
+          () =>
+            new Error(
+              `Maximum of ${this.MAX_CONCURRENT_TASKS} tasks can run concurrently`,
+            ),
         );
       }
 
@@ -330,6 +329,7 @@ export class TasksService {
     }
 
     this.mockTasks[taskIndex] = taskToUpdate;
+
     return of(taskToUpdate);
   }
 }
