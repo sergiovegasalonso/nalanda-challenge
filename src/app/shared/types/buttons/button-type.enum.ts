@@ -1,0 +1,15 @@
+export enum ButtonType {
+  Accent = 'btn-accent',
+  Dash = 'btn-dash',
+  Error = 'btn-error',
+  Neutral = 'btn-neutral',
+  Ghost = 'btn-ghost',
+  Info = 'btn-info',
+  Link = 'btn-link',
+  Outline = 'btn-outline',
+  Primary = 'btn-primary',
+  Secondary = 'btn-secondary',
+  Soft = 'btn-soft',
+  Success = 'btn-success',
+  Warning = 'btn-warning',
+}

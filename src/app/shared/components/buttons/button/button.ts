@@ -1,4 +1,6 @@
 import { Component, input } from '@angular/core';
+import { ButtonBehaviour } from '@shared/types/buttons/button-behaviour.enum';
+import { ButtonType } from '@shared/types/buttons/button-type.enum';
 
 @Component({
   selector: 'nlnd-button',
@@ -7,5 +9,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './button.html',
 })
 export class Button {
-  buttonType = input('primary');
+  buttonType = input(ButtonType.Primary);
+  buttonBehaviour = input(ButtonBehaviour.Active);
 }

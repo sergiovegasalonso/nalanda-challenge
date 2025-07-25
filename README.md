@@ -24,3 +24,15 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 8. Rutas relativas y absolutas explicación
 9. transfer stated problem with vercel
 
+## OK
+
+### UI de visualización
+
+* [OK] Tabla o panel que muestre tareas y estados.
+* [OK] Botones para acciones.
+
+### Controles manuales
+* Cancelar una tarea pendiente.
+* Reintentar una fallida.
+* Inyectar tareas nuevas.
+* Se podrá modificar la propiedad startAt de una tarea.

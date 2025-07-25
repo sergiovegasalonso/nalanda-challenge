@@ -9,8 +9,13 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { ArrowPath } from '@shared/components/icons/arrow-path/arrow-path';
+import { BadgeType } from '@app/shared/types/badges/badge-type.enum';
 import { BreakLine } from '@shared/components/spacing/break-line/break-line';
 import { Button } from '@shared/components/buttons/button/button';
+import { ButtonBehaviour } from '@app/shared/types/buttons/button-behaviour.enum';
+import { ButtonType } from '@app/shared/types/buttons/button-type.enum';
+import { DateInput } from '@app/shared/components/inputs/date-input/date-input';
 import { FormsModule } from '@angular/forms';
 import { Heading2 } from '@shared/components/headings/heading-2/heading-2';
 import { Loader } from '@shared/components/loader/loader';
@@ -19,6 +24,7 @@ import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
 import { TasksService } from '../../services/tasks/tasks';
+import { XMark } from '@shared/components/icons/x-mark/x-mark';
 import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
 
 export type AlertType = 'BLOCKED_TASK' | 'HIGH_PRIORITY' | 'INACTIVE';
@@ -41,6 +47,9 @@ export interface SystemAlert {
     Paragraph,
     BreakLine,
     Button,
+    ArrowPath,
+    XMark,
+    DateInput,
   ],
   templateUrl: './tasks-table.html',
 })
@@ -51,6 +60,8 @@ export class TasksTable implements OnInit, OnDestroy {
   private readonly tasksService = inject(TasksService);
   private readonly tasksSubject = new BehaviorSubject<Task[]>([]);
 
+  ButtonBehaviour = ButtonBehaviour;
+  ButtonType = ButtonType;
   loading = signal<boolean>(false);
   Status = Status;
   Priority = Priority;
@@ -108,13 +119,13 @@ export class TasksTable implements OnInit, OnDestroy {
   getBadgeClass(priority: number): string {
     switch (priority) {
       case Priority.High:
-        return 'badge-error';
+        return BadgeType.Error;
       case Priority.Medium:
-        return 'badge-warning';
+        return BadgeType.Warning;
       case Priority.Low:
-        return 'badge-success';
+        return BadgeType.Success;
       default:
-        return 'badge-success';
+        return BadgeType.Success;
     }
   }
 

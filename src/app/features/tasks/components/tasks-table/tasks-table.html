@@ -4,14 +4,16 @@
   <table class="table">
     <thead>
       <tr>
-        <th id="id">Id</th>
+        <th id="id" class="w-6">Id</th>
         <th id="title">Title</th>
         <th id="description">Description</th>
         <th id="priority">Priority</th>
         <th id="status">Status</th>
         <th id="depends-on">Depends On</th>
-        <th id="started-at">Started At</th>
+        <th id="started-at" class="w-70">Started At</th>
         <th id="completed-at">Completed At</th>
+        <th id="restart-action" class="w-6"></th>
+        <th id="cancel-action" class="w-6"></th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +39,34 @@
             <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
             <td>{{ task.startAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
             <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+            <td>
+              <nlnd-button
+                [buttonType]="ButtonType.Info"
+                [buttonBehaviour]="
+                  task.status === Status.Blocked ||
+                  task.status === Status.Cancelled ||
+                  task.status === Status.Failed
+                    ? ButtonBehaviour.Active
+                    : ButtonBehaviour.Disabled
+                "
+                (click)="submitTaskEdition()"
+              >
+                <nlnd-arrow-path />
+              </nlnd-button>
+            </td>
+            <td>
+              <nlnd-button
+                [buttonType]="ButtonType.Error"
+                [buttonBehaviour]="
+                  task.status === Status.InProgress
+                    ? ButtonBehaviour.Active
+                    : ButtonBehaviour.Disabled
+                "
+                (click)="submitTaskEdition()"
+              >
+                <nlnd-x-mark />
+              </nlnd-button>
+            </td>
           </tr>
         }
       } @else {
@@ -54,13 +84,20 @@
     <nlnd-break-line />
     <nlnd-paragraph>Insert startAt date:</nlnd-paragraph>
     <nlnd-break-line />
-    <input type="date" [(ngModel)]="startAtDate" />
+    <nlnd-break-line />
+    <nlnd-date-input [(ngModel)]="startAtDate" ngDefaultControl />
     <div class="modal-action">
       <form method="dialog" class="w-full flex justify-between">
-        <nlnd-button buttonType="btn-primary" (click)="submitTaskEdition()">
+        <nlnd-button
+          [buttonType]="ButtonType.Primary"
+          (click)="submitTaskEdition()"
+        >
           Save
         </nlnd-button>
-        <nlnd-button buttonType="btn-secondary" (click)="cancelTaskEdition()">
+        <nlnd-button
+          [buttonType]="ButtonType.Ghost"
+          (click)="cancelTaskEdition()"
+        >
           Cancel
         </nlnd-button>
       </form>
