@@ -185,6 +185,16 @@ export class TasksService {
   }
 
   restartTask(taskId: number): Observable<Task> {
+    // Check if there are already 3 tasks running concurrently
+    const runningTasks = this.mockTasks.filter(
+      (t) => t.status === Status.InProgress,
+    );
+    if (runningTasks.length >= 3) {
+      return throwError(
+        () => new Error('Maximum of 3 tasks can run concurrently'),
+      );
+    }
+
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
     if (taskIndex !== -1) {
@@ -282,6 +292,16 @@ export class TasksService {
     if (taskIndex !== -1) {
       const taskToUpdate = { ...updatedTask };
       if (taskToUpdate.startAt && taskToUpdate.startAt < new Date()) {
+        // Check if there are already 3 tasks running concurrently
+        const runningTasks = this.mockTasks.filter(
+          (t) => t.status === Status.InProgress,
+        );
+        if (runningTasks.length >= 3) {
+          return throwError(
+            () => new Error('Maximum of 3 tasks can run concurrently'),
+          );
+        }
+
         taskToUpdate.status = Status.InProgress;
       }
 
