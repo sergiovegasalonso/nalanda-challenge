@@ -1,6 +1,10 @@
-<nlnd-button [buttonType]="ButtonType.Primary" (click)="addRandomTask()"
-  >Add random task</nlnd-button
+<nlnd-button
+  [buttonType]="ButtonType.Primary"
+  (click)="addRandomTask()"
+  ariaLabel="Add random task"
 >
+  Add random task
+</nlnd-button>
 <nlnd-break-line />
 @if (loading()) {
   <nlnd-loader />
@@ -62,6 +66,7 @@
                     ? ButtonBehaviour.Active
                     : ButtonBehaviour.Disabled
                 "
+                ariaLabel="Edit task start at date"
                 (click)="startTaskEdition(task)"
               >
                 <nlnd-calendar-days-icon />
@@ -77,6 +82,7 @@
                     ? ButtonBehaviour.Active
                     : ButtonBehaviour.Disabled
                 "
+                ariaLabel="Restart task"
                 (click)="restartTask(task.id)"
               >
                 <nlnd-arrow-path-icon />
@@ -90,6 +96,7 @@
                     ? ButtonBehaviour.Active
                     : ButtonBehaviour.Disabled
                 "
+                ariaLabel="Cancel task"
                 (click)="cancelTask(task.id)"
               >
                 <nlnd-x-mark-icon />
@@ -118,12 +125,14 @@
       <form method="dialog" class="w-full flex justify-between">
         <nlnd-button
           [buttonType]="ButtonType.Primary"
+          ariaLabel="Save task edition"
           (click)="submitTaskEdition()"
         >
           Save
         </nlnd-button>
         <nlnd-button
           [buttonType]="ButtonType.Ghost"
+          ariaLabel="Cancel task edition"
           (click)="cancelTaskEdition()"
         >
           Cancel

@@ -9,6 +9,7 @@ import { ButtonType } from '@shared/types/buttons/button-type.enum';
   templateUrl: './button.html',
 })
 export class Button {
+  ariaLabel = input<string | undefined>('Button description');
   buttonType = input(ButtonType.Primary);
   buttonBehaviour = input(ButtonBehaviour.Active);
 }
