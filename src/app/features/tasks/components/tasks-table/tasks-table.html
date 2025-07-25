@@ -15,7 +15,7 @@
         <th id="status" class="w-70">Status</th>
         <th id="depends-on">Depends On</th>
         <th id="started-at" class="w-80">Started At</th>
-        <th id="completed-at">Completed At</th>
+        <th id="completed-at" class="w-80">Completed At</th>
         <th id="restart-action" class="w-6"></th>
         <th id="cancel-action" class="w-6"></th>
       </tr>
@@ -31,14 +31,25 @@
             <td>{{ task.title }}</td>
             <td>{{ task.description }}</td>
             <td>
-              <div [class]="'badge ' + getBadgeClass(task.priority)">
+              <nlnd-badge
+                [badgeColor]="getBadgeColorByPriority(task.priority)"
+                [badgeSize]="BadgeSize.Medium"
+                [badgeStyle]="BadgeStyle.Soft"
+              >
                 {{ getPriorityNameByValue(task.priority) }}
-              </div>
+              </nlnd-badge>
             </td>
             <td>
-              <div class="badge badge-md badge-outline">
+              <nlnd-badge
+                [badgeColor]="getBadgeColorByStatus(task.status)"
+                [badgeSize]="BadgeSize.Medium"
+                [badgeStyle]="BadgeStyle.Outline"
+              >
                 {{ getStatusNameByValue(task.status) }}
-              </div>
+                @if (task.status === Status.InProgress) {
+                  <nlnd-loader [loaderSize]="LoaderSize.ExtraSmall" />
+                }
+              </nlnd-badge>
             </td>
             <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
             <td>{{ task.startAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>

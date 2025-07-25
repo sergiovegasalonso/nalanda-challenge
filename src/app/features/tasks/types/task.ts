@@ -10,4 +10,5 @@ export interface Task {
   dependsOn?: number[];
   startAt?: Date;
   completedAt?: Date;
+  duration?: number;
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { LoaderSize } from '@shared/types/loader/loader-size.enum';
 
 @Component({
   selector: 'nlnd-loader',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './loader.html',
 })
-export class Loader {}
+export class Loader {
+  loaderSize = input(LoaderSize.Medium);
+}

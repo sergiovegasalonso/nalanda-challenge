@@ -1,8 +1,9 @@
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError, timer } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class TasksService {
       dependsOn: [2, 3],
       startAt: undefined,
       completedAt: undefined,
+      duration: 7000,
     },
     {
       id: 2,
@@ -28,6 +30,7 @@ export class TasksService {
       dependsOn: [],
       startAt: undefined,
       completedAt: undefined,
+      duration: 5000,
     },
     {
       id: 3,
@@ -38,6 +41,7 @@ export class TasksService {
       dependsOn: [],
       startAt: undefined,
       completedAt: undefined,
+      duration: 3000,
     },
     {
       id: 4,
@@ -48,6 +52,7 @@ export class TasksService {
       dependsOn: [1, 2],
       startAt: undefined,
       completedAt: undefined,
+      duration: 7000,
     },
     {
       id: 5,
@@ -58,6 +63,7 @@ export class TasksService {
       dependsOn: [],
       startAt: undefined,
       completedAt: undefined,
+      duration: 5000,
     },
     {
       id: 6,
@@ -68,6 +74,7 @@ export class TasksService {
       dependsOn: [7],
       startAt: undefined,
       completedAt: undefined,
+      duration: 6000,
     },
     {
       id: 7,
@@ -78,6 +85,7 @@ export class TasksService {
       dependsOn: [],
       startAt: undefined,
       completedAt: undefined,
+      duration: 4000,
     },
     {
       id: 8,
@@ -88,6 +96,7 @@ export class TasksService {
       dependsOn: [],
       startAt: undefined,
       completedAt: undefined,
+      duration: 2000,
     },
     {
       id: 9,
@@ -98,6 +107,7 @@ export class TasksService {
       dependsOn: [],
       startAt: undefined,
       completedAt: undefined,
+      duration: 1000,
     },
     {
       id: 10,
@@ -108,6 +118,7 @@ export class TasksService {
       dependsOn: [8, 9],
       startAt: undefined,
       completedAt: undefined,
+      duration: 5000,
     },
   ];
 
@@ -178,6 +189,56 @@ export class TasksService {
     }
 
     throw new Error('Task not found');
+  }
+
+  simulateTaskExecution(taskId: number): Observable<Task> {
+    console.warn('Simulating task execution for task ID:', taskId);
+    const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
+
+    if (taskIndex === -1) {
+      return throwError(() => new Error('Task not found'));
+    }
+
+    const task = this.mockTasks[taskIndex];
+
+    // Set task to in progress immediately
+    const inProgressTask = {
+      ...task,
+      status: Status.InProgress,
+      startAt: new Date(),
+    };
+    this.mockTasks[taskIndex] = inProgressTask;
+
+    // Generate random delay between 1 and 14 seconds
+    const delay = Math.floor(Math.random() * 14000) + 1000;
+
+    // Check if task should fail (delay is double of task duration)
+    const shouldFail = delay > (task.duration || 0) * 2;
+
+    return timer(delay).pipe(
+      switchMap(() => {
+        if (shouldFail) {
+          // Update task status to failed
+          const failedTask = {
+            ...task,
+            status: Status.Failed,
+            startAt: inProgressTask.startAt,
+          };
+          this.mockTasks[taskIndex] = failedTask;
+          return throwError(() => new Error('Task execution failed'));
+        }
+
+        // Update task status to completed
+        const completedTask = {
+          ...task,
+          status: Status.Completed,
+          startAt: inProgressTask.startAt,
+          completedAt: new Date(),
+        };
+        this.mockTasks[taskIndex] = completedTask;
+        return of(completedTask);
+      }),
+    );
   }
 
   updateTask(updatedTask: Task): Observable<Task> {
