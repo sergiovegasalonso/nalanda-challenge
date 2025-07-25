@@ -9,16 +9,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ArrowPath } from '@shared/components/icons/arrow-path/arrow-path';
+import { ArrowPathIcon } from '@shared/components/icons/arrow-path-icon/arrow-path-icon';
 import { Badge } from '@shared/components/badge/badge';
 import { BadgeColor } from '@shared/types/badges/badge-color.enum';
 import { BadgeSize } from '@shared/types/badges/badge-size.enum';
 import { BadgeStyle } from '@shared/types/badges/badge-style.enum';
 import { BreakLine } from '@shared/components/spacing/break-line/break-line';
 import { Button } from '@shared/components/buttons/button/button';
-import { ButtonBehaviour } from '@app/shared/types/buttons/button-behaviour.enum';
-import { ButtonType } from '@app/shared/types/buttons/button-type.enum';
-import { DateInput } from '@app/shared/components/inputs/date-input/date-input';
+import { ButtonBehaviour } from '@shared/types/buttons/button-behaviour.enum';
+import { ButtonType } from '@shared/types/buttons/button-type.enum';
+import { CalendarDaysIcon } from '@shared/components/icons/calendar-days-icon/calendar-days-icon';
+import { DateInput } from '@shared/components/inputs/date-input/date-input';
 import { FormsModule } from '@angular/forms';
 import { Heading2 } from '@shared/components/headings/heading-2/heading-2';
 import { Loader } from '@shared/components/loader/loader';
@@ -28,7 +29,7 @@ import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
 import { TasksService } from '../../services/tasks/tasks';
-import { XMark } from '@shared/components/icons/x-mark/x-mark';
+import { XMarkIcon } from '@shared/components/icons/x-mark-icon/x-mark-icon';
 import { finalize } from 'rxjs/operators';
 import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
 
@@ -52,10 +53,11 @@ export interface SystemAlert {
     Paragraph,
     BreakLine,
     Button,
-    ArrowPath,
-    XMark,
+    ArrowPathIcon,
+    XMarkIcon,
     DateInput,
     Badge,
+    CalendarDaysIcon,
   ],
   templateUrl: './tasks-table.html',
 })

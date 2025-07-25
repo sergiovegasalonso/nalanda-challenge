@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArrowPath } from './arrow-path';
+import { Alert } from './alert';
 
-describe('ArrowPath', () => {
-  let component: ArrowPath;
-  let fixture: ComponentFixture<ArrowPath>;
+describe('Alert', () => {
+  let component: Alert;
+  let fixture: ComponentFixture<Alert>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArrowPath],
+      imports: [Alert],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ArrowPath);
+    fixture = TestBed.createComponent(Alert);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

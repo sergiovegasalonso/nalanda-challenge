@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { XMark } from './x-mark';
+import { InfoIcon } from './info-icon';
 
-describe('XMark', () => {
-  let component: XMark;
-  let fixture: ComponentFixture<XMark>;
+describe('InfoIcon', () => {
+  let component: InfoIcon;
+  let fixture: ComponentFixture<InfoIcon>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [XMark],
+      imports: [InfoIcon],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(XMark);
+    fixture = TestBed.createComponent(InfoIcon);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

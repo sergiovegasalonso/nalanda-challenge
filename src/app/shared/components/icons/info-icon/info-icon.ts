@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-x-mark',
+  selector: 'nlnd-info-icon',
   standalone: true,
   imports: [],
-  templateUrl: './x-mark.html',
+  templateUrl: './info-icon.html',
 })
-export class XMark {}
+export class InfoIcon {}

@@ -9,14 +9,15 @@
     <thead>
       <tr>
         <th id="id" class="w-6">Id</th>
-        <th id="title">Title</th>
-        <th id="description">Description</th>
-        <th id="priority">Priority</th>
+        <th id="title" class="w-36">Title</th>
+        <th id="description" class="w-56">Description</th>
+        <th id="priority" class="w-48">Priority</th>
         <th id="status" class="w-70">Status</th>
         <th id="depends-on">Depends On</th>
         <th id="started-at" class="w-80">Started At</th>
         <th id="completed-at" class="w-80">Completed At</th>
         <th id="blocked-reason" class="w-80">Blocked Reason</th>
+        <th id="row-edition-action" class="w-6"></th>
         <th id="restart-action" class="w-6"></th>
         <th id="cancel-action" class="w-6"></th>
       </tr>
@@ -24,10 +25,7 @@
     <tbody>
       @if (tasks$ | async; as tasks) {
         @for (task of tasks; track task.id) {
-          <tr
-            (dblclick)="startTaskEdition(task)"
-            class="hover:bg-base-200 cursor-pointer"
-          >
+          <tr class="hover:bg-base-200 cursor-pointer">
             <td [id]="task.id">{{ task.id }}</td>
             <td>{{ task.title }}</td>
             <td>{{ task.description }}</td>
@@ -35,7 +33,7 @@
               <nlnd-badge
                 [badgeColor]="getBadgeColorByPriority(task.priority)"
                 [badgeSize]="BadgeSize.Medium"
-                [badgeStyle]="BadgeStyle.Soft"
+                [badgeStyle]="BadgeStyle.None"
               >
                 {{ getPriorityNameByValue(task.priority) }}
               </nlnd-badge>
@@ -44,7 +42,7 @@
               <nlnd-badge
                 [badgeColor]="getBadgeColorByStatus(task.status)"
                 [badgeSize]="BadgeSize.Medium"
-                [badgeStyle]="BadgeStyle.Dash"
+                [badgeStyle]="BadgeStyle.None"
               >
                 {{ getStatusNameByValue(task.status) }}
                 @if (task.status === Status.InProgress) {
@@ -58,6 +56,19 @@
             <td>{{ task.blockREason }}</td>
             <td>
               <nlnd-button
+                [buttonType]="ButtonType.Primary"
+                [buttonBehaviour]="
+                  task.status !== Status.InProgress
+                    ? ButtonBehaviour.Active
+                    : ButtonBehaviour.Disabled
+                "
+                (click)="startTaskEdition(task)"
+              >
+                <nlnd-calendar-days-icon />
+              </nlnd-button>
+            </td>
+            <td>
+              <nlnd-button
                 [buttonType]="ButtonType.Info"
                 [buttonBehaviour]="
                   task.attempts <= 2 &&
@@ -68,7 +79,7 @@
                 "
                 (click)="restartTask(task.id)"
               >
-                <nlnd-arrow-path />
+                <nlnd-arrow-path-icon />
               </nlnd-button>
             </td>
             <td>
@@ -81,7 +92,7 @@
                 "
                 (click)="cancelTask(task.id)"
               >
-                <nlnd-x-mark />
+                <nlnd-x-mark-icon />
               </nlnd-button>
             </td>
           </tr>

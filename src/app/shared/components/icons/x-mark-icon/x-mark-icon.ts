@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-arrow-path',
+  selector: 'nlnd-x-mark-icon',
   standalone: true,
   imports: [],
-  templateUrl: './arrow-path.html',
+  templateUrl: './x-mark-icon.html',
 })
-export class ArrowPath {}
+export class XMarkIcon {}

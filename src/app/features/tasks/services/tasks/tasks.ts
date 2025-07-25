@@ -1,14 +1,16 @@
-import { Observable, of, throwError, timer } from 'rxjs';
+import { Observable, Subject, of, throwError, timer } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Task } from '../../types/task';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
+  private readonly cancellationSubjects = new Map<number, Subject<void>>();
+
   private readonly mockTasks: Task[] = [
     {
       id: 1,
@@ -168,6 +170,14 @@ export class TasksService {
         throw new Error('Only tasks in progress can be cancelled');
       }
 
+      // Cancel the ongoing execution if exists
+      const cancellationSubject = this.cancellationSubjects.get(taskId);
+      if (cancellationSubject) {
+        cancellationSubject.next();
+        cancellationSubject.complete();
+        this.cancellationSubjects.delete(taskId);
+      }
+
       const cancelledTask = {
         ...task,
         status: Status.Cancelled,
@@ -229,6 +239,10 @@ export class TasksService {
     };
     this.mockTasks[taskIndex] = inProgressTask;
 
+    // Create cancellation subject for this task
+    const cancellationSubject = new Subject<void>();
+    this.cancellationSubjects.set(taskId, cancellationSubject);
+
     // Generate random delay between 1 and 14 seconds
     const delay = Math.floor(Math.random() * 14000) + 1000;
 
@@ -239,7 +253,11 @@ export class TasksService {
     const shouldFailRandomly = Math.random() < 0.2;
 
     return timer(delay).pipe(
+      takeUntil(cancellationSubject),
       switchMap(() => {
+        // Clean up cancellation subject
+        this.cancellationSubjects.delete(taskId);
+
         if (shouldFailDueToTimeout) {
           // Update task status to failed due to timeout
           const failedTask = {
