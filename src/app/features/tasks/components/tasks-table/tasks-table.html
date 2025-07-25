@@ -43,7 +43,7 @@
               <nlnd-badge
                 [badgeColor]="getBadgeColorByStatus(task.status)"
                 [badgeSize]="BadgeSize.Medium"
-                [badgeStyle]="BadgeStyle.Outline"
+                [badgeStyle]="BadgeStyle.Dash"
               >
                 {{ getStatusNameByValue(task.status) }}
                 @if (task.status === Status.InProgress) {

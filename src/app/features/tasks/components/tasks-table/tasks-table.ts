@@ -208,7 +208,7 @@ export class TasksTable implements OnInit, OnDestroy {
   getBadgeColorByStatus(status: number): BadgeColor {
     switch (status) {
       case Status.New:
-        return BadgeColor.Neutral;
+        return BadgeColor.Accent;
       case Status.InProgress:
         return BadgeColor.Info;
       case Status.Completed:
@@ -220,7 +220,7 @@ export class TasksTable implements OnInit, OnDestroy {
       case Status.Failed:
         return BadgeColor.Error;
       default:
-        return BadgeColor.Neutral;
+        return BadgeColor.Accent;
     }
   }
 
