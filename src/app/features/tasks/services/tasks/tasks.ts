@@ -114,4 +114,20 @@ export class TasksService {
   getAllTasks(): Observable<Task[]> {
     return of(this.mockTasks);
   }
+
+  updateTask(updatedTask: Task): Observable<Task[]> {
+    const taskIndex = this.mockTasks.findIndex((t) => t.id === updatedTask.id);
+
+    if (taskIndex !== -1) {
+      const taskToUpdate = { ...updatedTask };
+      if (taskToUpdate.startAt && taskToUpdate.startAt < new Date()) {
+        taskToUpdate.status = Status.InProgress;
+      }
+
+      this.mockTasks[taskIndex] = taskToUpdate;
+      return of(this.mockTasks);
+    }
+
+    throw new Error('Task not found');
+  }
 }

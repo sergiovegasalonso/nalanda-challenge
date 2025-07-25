@@ -11,6 +11,7 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 * refactorizar todo
 * in progress
 * <!-- TODO: Replace with nlnd-date-input -->
+* date input no se borra cuando se cancela
 
 ## Qué contiene la solución (TODO: explicar bien)
 

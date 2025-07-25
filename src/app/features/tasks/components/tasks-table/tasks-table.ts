@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import {
   Component,
   ElementRef,
@@ -65,13 +65,12 @@ export class TasksTable implements OnInit, OnDestroy {
   loading = signal<boolean>(false);
   Status = Status;
   Priority = Priority;
-  startAtDate: string | null = null;
+  startAtDate = signal<string | null>(null);
   tasks$ = this.tasksSubject.asObservable();
   taskToEdit = signal<Task | null>(null);
 
   ngOnInit() {
     this.getTasks();
-    this.subscribeToTasks();
   }
 
   ngOnDestroy() {
@@ -81,7 +80,7 @@ export class TasksTable implements OnInit, OnDestroy {
 
   cancelTaskEdition(): void {
     this.taskToEdit.set(null);
-    this.startAtDate = null;
+    this.startAtDate.set(null);
     this.closeModal();
   }
 
@@ -93,25 +92,21 @@ export class TasksTable implements OnInit, OnDestroy {
 
     const updatedTask = {
       ...this.taskToEdit()!,
-      startAt: new Date(this.startAtDate),
+      startAt: new Date(this.startAtDate()!),
     };
 
-    if (updatedTask.startAt < new Date()) {
-      updatedTask.status = Status.InProgress;
-    }
-
-    const currentTasks = this.tasksSubject.value;
-    const taskIndex = currentTasks.findIndex((t) => t.id === updatedTask.id);
-
-    if (taskIndex !== -1) {
-      const updatedTasks = [...currentTasks];
-      updatedTasks[taskIndex] = updatedTask;
-      this.tasksSubject.next(updatedTasks);
-    }
-
-    this.taskToEdit.set(null);
-    this.startAtDate = null;
-    this.closeModal();
+    this.tasksService.updateTask(updatedTask).subscribe({
+      next: (tasks) => {
+        this.tasksSubject.next(tasks);
+        this.taskToEdit.set(null);
+        this.startAtDate.set(null);
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error updating task:', error);
+        this.closeModal();
+      },
+    });
   }
 
   getBadgeClass(priority: number): string {
@@ -169,38 +164,5 @@ export class TasksTable implements OnInit, OnDestroy {
 
   private openModal(): void {
     this.modal.nativeElement.showModal();
-  }
-
-  private subscribeToTasks() {
-    this.tasks$.pipe(takeUntil(this.destroy$)).subscribe({
-      next: (tasks) => {
-        const updatedTasks = this.updateTaskStatusBasedOnStartDate(tasks);
-        this.tasksSubject.next(updatedTasks);
-      },
-      error: (error) => {
-        console.error('Error in tasks subscription:', error);
-      },
-    });
-  }
-
-  private updateTaskStatusBasedOnStartDate(tasks: Task[]): Task[] {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    return tasks.map((task) => {
-      if (task.startAt) {
-        const taskStartAtDate = new Date(task.startAt);
-        taskStartAtDate.setHours(0, 0, 0, 0);
-
-        if (taskStartAtDate <= today) {
-          return {
-            ...task,
-            status: Status.InProgress,
-          };
-        }
-      }
-
-      return task;
-    });
   }
 }
