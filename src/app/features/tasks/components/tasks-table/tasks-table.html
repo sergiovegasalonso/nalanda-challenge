@@ -1,3 +1,7 @@
+<nlnd-button [buttonType]="ButtonType.Primary" (click)="addRandomTask()"
+  >Add random task</nlnd-button
+>
+<nlnd-break-line />
 @if (loading()) {
   <nlnd-loader />
 } @else {
@@ -49,7 +53,7 @@
                     ? ButtonBehaviour.Active
                     : ButtonBehaviour.Disabled
                 "
-                (click)="submitTaskEdition()"
+                (click)="restartTask(task.id)"
               >
                 <nlnd-arrow-path />
               </nlnd-button>
@@ -62,7 +66,7 @@
                     ? ButtonBehaviour.Active
                     : ButtonBehaviour.Disabled
                 "
-                (click)="submitTaskEdition()"
+                (click)="cancelTask(task.id)"
               >
                 <nlnd-x-mark />
               </nlnd-button>

@@ -111,11 +111,76 @@ export class TasksService {
     },
   ];
 
+  addRandomTask(): Observable<Task> {
+    const priorities = [Priority.Low, Priority.Medium, Priority.High];
+
+    const existingIds = this.mockTasks.map((task) => task.id);
+    const newId = Math.max(...existingIds) + 1;
+
+    const randomTask: Task = {
+      id: newId,
+      title: `Title ${newId}`,
+      description: `Description for task ${newId}`,
+      priority: priorities[Math.floor(Math.random() * priorities.length)],
+      status: Status.New,
+      dependsOn:
+        Math.random() > 0.7
+          ? [existingIds[Math.floor(Math.random() * existingIds.length)]]
+          : [],
+      startAt: undefined,
+      completedAt: undefined,
+    };
+
+    this.mockTasks.push(randomTask);
+    return of(randomTask);
+  }
+
+  cancelTask(taskId: number): Observable<Task> {
+    const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
+
+    if (taskIndex !== -1) {
+      const task = this.mockTasks[taskIndex];
+
+      // Only allow cancellation if task is in progress
+      if (task.status !== Status.InProgress) {
+        throw new Error('Only tasks in progress can be cancelled');
+      }
+
+      const cancelledTask = {
+        ...task,
+        status: Status.Cancelled,
+      };
+
+      this.mockTasks[taskIndex] = cancelledTask;
+      return of(cancelledTask);
+    }
+
+    throw new Error('Task not found');
+  }
+
   getAllTasks(): Observable<Task[]> {
     return of(this.mockTasks);
   }
 
-  updateTask(updatedTask: Task): Observable<Task[]> {
+  restartTask(taskId: number): Observable<Task> {
+    const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
+
+    if (taskIndex !== -1) {
+      const task = this.mockTasks[taskIndex];
+
+      const restartedTask = {
+        ...task,
+        status: Status.InProgress,
+      };
+
+      this.mockTasks[taskIndex] = restartedTask;
+      return of(restartedTask);
+    }
+
+    throw new Error('Task not found');
+  }
+
+  updateTask(updatedTask: Task): Observable<Task> {
     const taskIndex = this.mockTasks.findIndex((t) => t.id === updatedTask.id);
 
     if (taskIndex !== -1) {
@@ -125,7 +190,7 @@ export class TasksService {
       }
 
       this.mockTasks[taskIndex] = taskToUpdate;
-      return of(this.mockTasks);
+      return of(taskToUpdate);
     }
 
     throw new Error('Task not found');

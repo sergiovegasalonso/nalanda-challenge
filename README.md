@@ -8,13 +8,14 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 /_ sonar-disable-next-line:at-rule-no-unknown _/
 * hacer que no fallen los not found, como en sergiovegasalonso.lab
 * tests de todo y unificar criterio
-* refactorizar todo
+* refactorizar todo!!!!!!!!!!!!!!!
 * in progress
 * <!-- TODO: Replace with nlnd-date-input -->
 * date input no se borra cuando se cancela
 
 ## Qué contiene la solución (TODO: explicar bien)
 
+0. COmienzo...cambiando la fecha de inicio a un día anterior o igual a hoy
 1. Pre commit con husky laxo para mejorar la experiencia de desarrollo
 2. eslint para mejorar la calidad del código
 3. Prettier para...
@@ -33,7 +34,8 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 * [OK] Botones para acciones.
 
 ### Controles manuales
-* Cancelar una tarea pendiente.
-* Reintentar una fallida.
-* Inyectar tareas nuevas.
-* Se podrá modificar la propiedad startAt de una tarea.
+
+* [OK] Cancelar una tarea en progreso.
+* [OK] Reintentar una fallida.
+* [OK] Inyectar tareas nuevas.
+* [OK] Se podrá modificar la propiedad startAt de una tarea.

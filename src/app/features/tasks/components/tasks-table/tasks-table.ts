@@ -78,10 +78,51 @@ export class TasksTable implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  addRandomTask(): void {
+    this.tasksService.addRandomTask().subscribe({
+      next: () => {
+        this.getTasks();
+      },
+      error: (error) => {
+        console.error('Error adding random task:', error);
+      },
+    });
+  }
+
+  cancelTask(taskId: number): void {
+    console.log('Cancelling task with ID:', taskId);
+    const task = this.tasksSubject.value.find((t) => t.id === taskId);
+    if (!task) {
+      console.warn('Task not found');
+      return;
+    }
+
+    this.tasksService.cancelTask(task.id).subscribe({
+      next: () => {
+        this.getTasks(); // Refresh the tasks list
+      },
+      error: (error) => {
+        console.error('Error cancelling task:', error);
+      },
+    });
+  }
+
   cancelTaskEdition(): void {
     this.taskToEdit.set(null);
     this.startAtDate.set(null);
     this.closeModal();
+  }
+
+  restartTask(taskId: number): void {
+    console.log('Restarting task with ID:', taskId);
+    this.tasksService.restartTask(taskId).subscribe({
+      next: () => {
+        this.getTasks(); // Refresh the tasks list
+      },
+      error: (error) => {
+        console.error('Error restarting task:', error);
+      },
+    });
   }
 
   submitTaskEdition(): void {
@@ -96,8 +137,8 @@ export class TasksTable implements OnInit, OnDestroy {
     };
 
     this.tasksService.updateTask(updatedTask).subscribe({
-      next: (tasks) => {
-        this.tasksSubject.next(tasks);
+      next: () => {
+        this.getTasks();
         this.taskToEdit.set(null);
         this.startAtDate.set(null);
         this.closeModal();
