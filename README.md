@@ -39,3 +39,27 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 * [OK] Reintentar una fallida.
 * [OK] Inyectar tareas nuevas.
 * [OK] Se podrá modificar la propiedad startAt de una tarea.
+
+### Ejecución reactiva
+ * Las tareas deben ejecutarse automáticamente si todas sus
+dependencias están completadas y la fecha startAt (si existe) ya ha
+llegado.Solo pueden ejecutarse 3 tareas al mismo tiempo (concurrencia
+máxima).
+* Se debe respetar la prioridad (1 > 2 > 3…).
+* [OK] Cada tarea se ejecuta con timer(duracion) .
+* [OK] Las tareas se podrán renovar modificando su propiedad startAt.
+
+###  Fallo y reintento
+
+* [OK] Simula fallos aleatorios.
+* [OK] Hasta 2 reintentos por tarea.
+* [OK] Si una tarea tarda más del doble de su duración esperada, debe
+marcarse como "bloqueada".
+
+### Streams en vivo
+
+* [OK] Exponer un Observable con el estado actual de todas las tareas.
+* Exponer un Observable con alertas del sistema:
+  * "Tarea X bloqueada".
+  * "Demasiadas tareas de prioridad alta pendientes".
+  * "Sistema inactivo".

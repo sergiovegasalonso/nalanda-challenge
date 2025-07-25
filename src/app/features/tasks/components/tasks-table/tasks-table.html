@@ -16,6 +16,7 @@
         <th id="depends-on">Depends On</th>
         <th id="started-at" class="w-80">Started At</th>
         <th id="completed-at" class="w-80">Completed At</th>
+        <th id="blocked-reason" class="w-80">Blocked Reason</th>
         <th id="restart-action" class="w-6"></th>
         <th id="cancel-action" class="w-6"></th>
       </tr>
@@ -54,13 +55,14 @@
             <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
             <td>{{ task.startAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
             <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
+            <td>{{ task.blockREason }}</td>
             <td>
               <nlnd-button
                 [buttonType]="ButtonType.Info"
                 [buttonBehaviour]="
-                  task.status === Status.Blocked ||
-                  task.status === Status.Cancelled ||
-                  task.status === Status.Failed
+                  task.attempts <= 2 &&
+                  (task.status === Status.Cancelled ||
+                    task.status === Status.Failed)
                     ? ButtonBehaviour.Active
                     : ButtonBehaviour.Disabled
                 "

@@ -20,6 +20,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 7000,
+      attempts: 0,
     },
     {
       id: 2,
@@ -31,6 +32,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 5000,
+      attempts: 0,
     },
     {
       id: 3,
@@ -42,6 +44,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 3000,
+      attempts: 0,
     },
     {
       id: 4,
@@ -53,6 +56,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 7000,
+      attempts: 0,
     },
     {
       id: 5,
@@ -64,6 +68,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 5000,
+      attempts: 0,
     },
     {
       id: 6,
@@ -75,6 +80,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 6000,
+      attempts: 0,
     },
     {
       id: 7,
@@ -86,6 +92,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 4000,
+      attempts: 0,
     },
     {
       id: 8,
@@ -97,6 +104,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 2000,
+      attempts: 0,
     },
     {
       id: 9,
@@ -108,6 +116,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 1000,
+      attempts: 0,
     },
     {
       id: 10,
@@ -119,6 +128,7 @@ export class TasksService {
       startAt: undefined,
       completedAt: undefined,
       duration: 5000,
+      attempts: 0,
     },
   ];
 
@@ -140,6 +150,7 @@ export class TasksService {
           : [],
       startAt: undefined,
       completedAt: undefined,
+      attempts: 0,
     };
 
     this.mockTasks.push(randomTask);
@@ -201,7 +212,6 @@ export class TasksService {
 
     const task = this.mockTasks[taskIndex];
 
-    // Set task to in progress immediately
     const inProgressTask = {
       ...task,
       status: Status.InProgress,
@@ -212,20 +222,45 @@ export class TasksService {
     // Generate random delay between 1 and 14 seconds
     const delay = Math.floor(Math.random() * 14000) + 1000;
 
-    // Check if task should fail (delay is double of task duration)
-    const shouldFail = delay > (task.duration || 0) * 2;
+    // Check if task should fail due to timeout (delay is double of task duration)
+    const shouldFailDueToTimeout = delay > (task.duration || 0) * 2;
+
+    // Check if task should fail randomly (20% chance)
+    const shouldFailRandomly = Math.random() < 0.2;
 
     return timer(delay).pipe(
       switchMap(() => {
-        if (shouldFail) {
-          // Update task status to failed
+        if (shouldFailDueToTimeout) {
+          // Update task status to failed due to timeout
+          const failedTask = {
+            ...task,
+            status: Status.Blocked,
+            startAt: inProgressTask.startAt,
+            attempts: inProgressTask.attempts + 1,
+            blockREason: 'Task execution failed due to timeout',
+          };
+
+          this.mockTasks[taskIndex] = failedTask;
+          return throwError(
+            () => new Error('Task execution failed due to timeout'),
+          );
+        }
+
+        if (shouldFailRandomly) {
+          // Update task status to failed randomly
           const failedTask = {
             ...task,
             status: Status.Failed,
             startAt: inProgressTask.startAt,
+            attempts: inProgressTask.attempts + 1,
           };
+
+          if (failedTask.attempts >= 3) {
+            failedTask.blockREason = 'Task execution failed after 3 attempts';
+          }
+
           this.mockTasks[taskIndex] = failedTask;
-          return throwError(() => new Error('Task execution failed'));
+          return throwError(() => new Error('Task execution failed randomly'));
         }
 
         // Update task status to completed
