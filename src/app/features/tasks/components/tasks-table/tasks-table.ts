@@ -85,13 +85,7 @@ export class TasksTable implements OnInit, OnDestroy {
     this.closeModal();
   }
 
-  closeModal(): void {
-    this.modal.nativeElement.close();
-  }
-
   submitTaskEdition(): void {
-    console.log(this.startAtDate);
-    console.log(this.taskToEdit());
     if (!this.taskToEdit() || !this.startAtDate) {
       this.closeModal();
       return;
@@ -101,6 +95,10 @@ export class TasksTable implements OnInit, OnDestroy {
       ...this.taskToEdit()!,
       startAt: new Date(this.startAtDate),
     };
+
+    if (updatedTask.startAt < new Date()) {
+      updatedTask.status = Status.InProgress;
+    }
 
     const currentTasks = this.tasksSubject.value;
     const taskIndex = currentTasks.findIndex((t) => t.id === updatedTask.id);
@@ -142,7 +140,16 @@ export class TasksTable implements OnInit, OnDestroy {
     return getEnumNameByValue(Status, value);
   }
 
-  getTasks() {
+  startTaskEdition(task: Task): void {
+    this.taskToEdit.set(task);
+    this.openModal();
+  }
+
+  private closeModal(): void {
+    this.modal.nativeElement.close();
+  }
+
+  private getTasks() {
     this.loading.set(true);
     this.tasksService.getAllTasks().subscribe({
       next: (tasks) => {
@@ -155,30 +162,45 @@ export class TasksTable implements OnInit, OnDestroy {
     });
   }
 
-  getTaskNameById(id: number): string {
+  private getTaskNameById(id: number): string {
     const task = this.tasksSubject.value.find((t) => t.id === id);
     return task ? `#${task.title}` : '';
   }
 
-  openModal(): void {
+  private openModal(): void {
     this.modal.nativeElement.showModal();
   }
 
-  startTaskEdition(task: Task): void {
-    this.taskToEdit.set(task);
-    this.openModal();
-  }
-
-  subscribeToTasks() {
+  private subscribeToTasks() {
     this.tasks$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (tasks) => {
-        // Execute your code here when tasks change
-        console.log('Tasks updated:', tasks);
-        // Add your logic here
+        const updatedTasks = this.updateTaskStatusBasedOnStartDate(tasks);
+        this.tasksSubject.next(updatedTasks);
       },
       error: (error) => {
         console.error('Error in tasks subscription:', error);
       },
+    });
+  }
+
+  private updateTaskStatusBasedOnStartDate(tasks: Task[]): Task[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return tasks.map((task) => {
+      if (task.startAt) {
+        const taskStartAtDate = new Date(task.startAt);
+        taskStartAtDate.setHours(0, 0, 0, 0);
+
+        if (taskStartAtDate <= today) {
+          return {
+            ...task,
+            status: Status.InProgress,
+          };
+        }
+      }
+
+      return task;
     });
   }
 }
