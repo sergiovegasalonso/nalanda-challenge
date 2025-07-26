@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { Heading2 } from '@shared/components/headings/heading-2/heading-2';
 import { Loader } from '@shared/components/loader/loader';
 import { LoaderSize } from '@shared/types/loader/loader-size.enum';
+import { Notifications } from '@features/notifications/services/notifications';
 import { Paragraph } from '@shared/components/paragraph/paragraph';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
@@ -34,14 +35,6 @@ import { TasksService } from '../../services/tasks/tasks';
 import { XMarkIcon } from '@shared/components/icons/x-mark-icon/x-mark-icon';
 import { finalize } from 'rxjs/operators';
 import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
-
-export type AlertType = 'BLOCKED_TASK' | 'HIGH_PRIORITY' | 'INACTIVE';
-
-export interface SystemAlert {
-  type: AlertType;
-  message: string;
-  timestamp: Date;
-}
 
 @Component({
   selector: 'nlnd-tasks-table',
@@ -69,6 +62,7 @@ export class TasksTable implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
   private readonly tasksService = inject(TasksService);
+  private readonly notificationsService = inject(Notifications);
   private readonly tasksSubject = new BehaviorSubject<Task[]>([]);
 
   BadgeColor = BadgeColor;
@@ -272,5 +266,24 @@ export class TasksTable implements OnInit, OnDestroy {
 
   private openModal(): void {
     this.modal.nativeElement.showModal();
+  }
+
+  showRandomNotification(): void {
+    const messages = [
+      'Task completed successfully!',
+      'Warning: Task execution delayed',
+      'Error: Task failed to complete',
+      'Info: New task dependency added',
+    ];
+
+    const methods = [
+      () => this.notificationsService.showSuccess(messages[0]),
+      () => this.notificationsService.showWarning(messages[1]),
+      () => this.notificationsService.showError(messages[2]),
+      () => this.notificationsService.showInfo(messages[3]),
+    ];
+
+    const randomIndex = Math.floor(Math.random() * methods.length);
+    methods[randomIndex]();
   }
 }

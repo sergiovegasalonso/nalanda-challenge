@@ -324,7 +324,6 @@ export class TasksService {
             ),
         );
       }
-
       taskToUpdate.status = Status.InProgress;
     }
 

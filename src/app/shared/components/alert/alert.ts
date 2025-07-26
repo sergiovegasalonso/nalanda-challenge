@@ -17,5 +17,5 @@ export class Alert {
   AlertColor = AlertColor;
   alertColor = input(AlertColor.Info);
   alertDirection = input(AlertDirection.Horizontal);
-  alertStyle = input(AlertStyle.Outline);
+  alertStyle = input(AlertStyle.None);
 }
