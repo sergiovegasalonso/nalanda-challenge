@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import { ArrowPathIcon } from '@shared/components/icons/arrow-path-icon/arrow-path-icon';
 import { Badge } from '@shared/components/badge/badge';
-import { BadgeColor } from '@shared/types/badges/badge-color.enum';
-import { BadgeSize } from '@shared/types/badges/badge-size.enum';
-import { BadgeStyle } from '@shared/types/badges/badge-style.enum';
+import { BadgeColor } from '@shared/types/badge/badge-color.enum';
+import { BadgeSize } from '@shared/types/badge/badge-size.enum';
+import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
 import { BreakLine } from '@shared/components/spacing/break-line/break-line';
 import { Button } from '@shared/components/buttons/button/button';
 import { ButtonBehaviour } from '@shared/types/buttons/button-behaviour.enum';
@@ -27,6 +27,7 @@ import { LoaderSize } from '@shared/types/loader/loader-size.enum';
 import { Paragraph } from '@shared/components/paragraph/paragraph';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
+import { Table } from '@shared/components/table/table';
 import { Task } from '../../types/task';
 import { TasksService } from '../../services/tasks/tasks';
 import { XMarkIcon } from '@shared/components/icons/x-mark-icon/x-mark-icon';
@@ -58,6 +59,7 @@ export interface SystemAlert {
     DateInput,
     Badge,
     CalendarDaysIcon,
+    Table,
   ],
   templateUrl: './tasks-table.html',
 })
