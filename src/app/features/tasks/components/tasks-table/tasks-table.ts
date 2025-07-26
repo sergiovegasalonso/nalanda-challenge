@@ -28,6 +28,7 @@ import { Paragraph } from '@shared/components/paragraph/paragraph';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Table } from '@shared/components/table/table';
+import { TableModifier } from '@shared/types/table/table-modifier.enum';
 import { Task } from '../../types/task';
 import { TasksService } from '../../services/tasks/tasks';
 import { XMarkIcon } from '@shared/components/icons/x-mark-icon/x-mark-icon';
@@ -76,6 +77,7 @@ export class TasksTable implements OnInit, OnDestroy {
   ButtonBehaviour = ButtonBehaviour;
   ButtonType = ButtonType;
   LoaderSize = LoaderSize;
+  TableModifier = TableModifier;
   loading = signal<boolean>(false);
   Status = Status;
   Priority = Priority;
