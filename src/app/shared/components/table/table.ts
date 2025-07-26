@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { TableModifier } from '@app/shared/types/table/table-modifier.enum';
-import { TableSize } from '@app/shared/types/table/table-size.enum';
+import { TableModifier } from '@shared/types/table/table-modifier.enum';
+import { TableSize } from '@shared/types/table/table-size.enum';
 
 @Component({
   selector: 'nlnd-table',

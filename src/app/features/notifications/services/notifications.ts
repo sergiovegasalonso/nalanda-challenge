@@ -1,32 +1,26 @@
 import { Injectable, signal } from '@angular/core';
 import { AlertColor } from '@shared/types/alert/alert-color.enum';
-
-export interface NotificationAlert {
-  id: string;
-  message: string;
-  color: AlertColor;
-  timestamp: number;
-}
+import { NotificationAlert } from '../types/notification-alert';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Notifications {
+  private cleanupInterval: NodeJS.Timeout | null = null;
   private readonly notifications = signal<NotificationAlert[]>([]);
-
-  // Expose as readonly signal
   readonly notifications$ = this.notifications.asReadonly();
 
-  constructor() {
-    // Auto-remove notifications after 5 seconds
-    setInterval(() => {
-      const now = Date.now();
-      const current = this.notifications();
-      const filtered = current.filter((n) => now - n.timestamp < 5000);
-      if (filtered.length !== current.length) {
-        this.notifications.set(filtered);
-      }
-    }, 1000);
+  clearAll(): void {
+    this.notifications.set([]);
+    this.stopCleanupInterval();
+  }
+
+  showError(message: string): void {
+    this.showNotification(message, AlertColor.Error);
+  }
+
+  showInfo(message: string): void {
+    this.showNotification(message, AlertColor.Info);
   }
 
   showNotification(message: string, color: AlertColor = AlertColor.Info): void {
@@ -38,29 +32,49 @@ export class Notifications {
     };
 
     this.notifications.set([...this.notifications(), notification]);
+    this.startCleanupInterval();
   }
 
   showSuccess(message: string): void {
     this.showNotification(message, AlertColor.Success);
   }
 
-  showError(message: string): void {
-    this.showNotification(message, AlertColor.Error);
-  }
-
   showWarning(message: string): void {
     this.showNotification(message, AlertColor.Warning);
   }
 
-  showInfo(message: string): void {
-    this.showNotification(message, AlertColor.Info);
-  }
-
   removeNotification(id: string): void {
     this.notifications.set(this.notifications().filter((n) => n.id !== id));
+
+    // Stop interval if no notifications remain
+    if (this.notifications().length === 0) {
+      this.stopCleanupInterval();
+    }
   }
 
-  clearAll(): void {
-    this.notifications.set([]);
+  private startCleanupInterval(): void {
+    // Only start if not already running
+    this.cleanupInterval ??= setInterval(() => {
+      console.log('notifications:');
+      const now = Date.now();
+      const current = this.notifications();
+      const filtered = current.filter((n) => now - n.timestamp < 5000);
+
+      if (filtered.length !== current.length) {
+        this.notifications.set(filtered);
+      }
+
+      // Stop interval if no notifications remain
+      if (filtered.length === 0) {
+        this.stopCleanupInterval();
+      }
+    }, 1000);
+  }
+
+  private stopCleanupInterval(): void {
+    if (this.cleanupInterval !== null) {
+      clearInterval(this.cleanupInterval);
+      this.cleanupInterval = null;
+    }
   }
 }
