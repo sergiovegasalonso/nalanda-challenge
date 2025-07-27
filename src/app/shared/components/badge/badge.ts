@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
-import { BadgeColor } from '@shared/types/badges/badge-color.enum';
-import { BadgeSize } from '@shared/types/badges/badge-size.enum';
-import { BadgeStyle } from '@app/shared/types/badges/badge-style.enum';
+import { BadgeColor } from '@shared/types/badge/badge-color.enum';
+import { BadgeSize } from '@shared/types/badge/badge-size.enum';
+import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
 
 @Component({
   selector: 'nlnd-badge',

@@ -1,9 +1,9 @@
 import { Observable, Subject, of, throwError, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Priority } from '../../types/priority.enum';
-import { Status } from '../../types/status.enum';
-import { Task } from '../../types/task';
+import { Priority } from '../types/priority.enum';
+import { Status } from '../types/status.enum';
+import { Task } from '../types/task';
 
 @Injectable({
   providedIn: 'root',
@@ -169,7 +169,7 @@ export class TasksService {
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
     if (taskIndex === -1) {
-      return throwError(() => new Error('Task not found'));
+      return throwError(() => new Error(`Task ${taskId} not found`));
     }
 
     const task = this.mockTasks[taskIndex];
@@ -198,7 +198,7 @@ export class TasksService {
     return of(this.mockTasks);
   }
 
-  restartTask(taskId: number): Observable<Task> {
+  runTask(taskId: number): Observable<Task> {
     const runningTasks = this.mockTasks.filter(
       (t) => t.status === Status.InProgress,
     );
@@ -215,26 +215,26 @@ export class TasksService {
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
     if (taskIndex === -1) {
-      return throwError(() => new Error('Task not found'));
+      return throwError(() => new Error(`Task ${taskId} not found`));
     }
 
-    const task = this.mockTasks[taskIndex];
+    const targetTask = this.mockTasks[taskIndex];
 
-    const restartedTask = {
-      ...task,
-      status: Status.InProgress,
-    };
+    const allDependenciesCompleted =
+      !targetTask.dependsOn?.length ||
+      targetTask.dependsOn.every(
+        (depId) =>
+          this.mockTasks.find((t) => t.id === depId)?.status ===
+          Status.Completed,
+      );
 
-    this.mockTasks[taskIndex] = restartedTask;
-
-    return of(restartedTask);
-  }
-
-  simulateTaskExecution(taskId: number): Observable<Task> {
-    const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
-
-    if (taskIndex === -1) {
-      return throwError(() => new Error('Task not found'));
+    if (!allDependenciesCompleted) {
+      return throwError(
+        () =>
+          new Error(
+            `Task ${taskId} cannot be started due to incomplete dependencies`,
+          ),
+      );
     }
 
     const task = this.mockTasks[taskIndex];
@@ -266,12 +266,13 @@ export class TasksService {
             status: Status.Blocked,
             startAt: inProgressTask.startAt,
             attempts: inProgressTask.attempts + 1,
-            blockREason: 'Task execution failed due to timeout',
+            blockReason: 'Task execution failed due to timeout',
           };
 
           this.mockTasks[taskIndex] = failedTask;
+
           return throwError(
-            () => new Error('Task execution failed due to timeout'),
+            () => new Error(`Task ${task.id} execution failed due to timeout`),
           );
         }
 
@@ -288,7 +289,10 @@ export class TasksService {
           }
 
           this.mockTasks[taskIndex] = failedTask;
-          return throwError(() => new Error('Task execution failed randomly'));
+
+          return throwError(
+            () => new Error(`Task ${task.id} execution failed randomly`),
+          );
         }
 
         const completedTask = {
@@ -304,32 +308,15 @@ export class TasksService {
     );
   }
 
-  updateTask(updatedTask: Task): Observable<Task> {
-    const taskIndex = this.mockTasks.findIndex((t) => t.id === updatedTask.id);
+  updateTask(task: Task): Observable<Task> {
+    const taskIndex = this.mockTasks.findIndex((t) => t.id === task.id);
 
     if (taskIndex === -1) {
-      return throwError(() => new Error('Task not found'));
+      return throwError(() => new Error(`Task ${task.id} not found`));
     }
 
-    const taskToUpdate = { ...updatedTask };
-    if (taskToUpdate.startAt && taskToUpdate.startAt < new Date()) {
-      const runningTasks = this.mockTasks.filter(
-        (t) => t.status === Status.InProgress,
-      );
-      if (runningTasks.length >= this.MAX_CONCURRENT_TASKS) {
-        return throwError(
-          () =>
-            new Error(
-              `Maximum of ${this.MAX_CONCURRENT_TASKS} tasks can run concurrently`,
-            ),
-        );
-      }
+    this.mockTasks[taskIndex] = task;
 
-      taskToUpdate.status = Status.InProgress;
-    }
-
-    this.mockTasks[taskIndex] = taskToUpdate;
-
-    return of(taskToUpdate);
+    return of(task);
   }
 }

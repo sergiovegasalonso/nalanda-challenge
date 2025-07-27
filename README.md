@@ -23,3 +23,12 @@ Esta es una división que a mí me gusta pero que no es el único enfoque.
 Disculpen si hay algún error, he intentado ir la más rápido posible compaginándolo con el trabajo.
 
 Muchas gracias.
+
+## Cosas que no se han desrrollado por falta de tiempo
+
+1. Un buen sistema de _i18n_ para tener todos las cadenas de texto localizadas y con la posibilidad de ser traducidas.
+2. El sistema de prioridades no lo he entendido.
+3. No he aplicado optimización usando _SSR_ y _prerendering_ porque _Vercel_ me estaba dando problemas para la configuración, pero es una problema que 
+no hubiera existido en un despliegue en el que hubiera tenido más control, pudiendo haber usado _pm2_, _NginX_, _Apache_, etc..
+4. Las tareas deben ejecutarse automáticamente si todas sus dependencias están completadas y la fecha startAt (si existe) ya ha llegado. Solo pueden ejecutarse 3 tareas al mismo tiempo (concurrencia máxima).
+5. Testing completo.

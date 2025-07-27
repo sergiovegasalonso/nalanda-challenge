@@ -1,6 +1,6 @@
-import { Priority } from '../../types/priority.enum';
-import { Status } from '../../types/status.enum';
-import { Task } from '../../types/task';
+import { Priority } from '../types/priority.enum';
+import { Status } from '../types/status.enum';
+import { Task } from '../types/task';
 import { TasksService } from './tasks';
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';

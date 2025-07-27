@@ -6,10 +6,11 @@
   Add random task
 </nlnd-button>
 <nlnd-break-line />
+<nlnd-break-line />
 @if (loading()) {
   <nlnd-loader />
 } @else {
-  <table class="table">
+  <nlnd-table [tableModifier]="TableModifier.Zebra">
     <thead>
       <tr>
         <th id="id" class="w-6">Id</th>
@@ -29,7 +30,7 @@
     <tbody>
       @if (tasks$ | async; as tasks) {
         @for (task of tasks; track task.id) {
-          <tr class="hover:bg-base-200 cursor-pointer">
+          <tr>
             <td [id]="task.id">{{ task.id }}</td>
             <td>{{ task.title }}</td>
             <td>{{ task.description }}</td>
@@ -83,7 +84,7 @@
                     : ButtonBehaviour.Disabled
                 "
                 ariaLabel="Restart task"
-                (click)="restartTask(task.id)"
+                (click)="runTask(task.id)"
               >
                 <nlnd-arrow-path-icon />
               </nlnd-button>
@@ -110,7 +111,7 @@
         </tr>
       }
     </tbody>
-  </table>
+  </nlnd-table>
 }
 
 <dialog #modal id="modal" class="modal">
