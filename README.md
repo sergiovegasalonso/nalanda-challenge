@@ -31,3 +31,4 @@ Muchas gracias.
 3. No he aplicado optimización usando _SSR_ y _prerendering_ porque _Vercel_ me estaba dando problemas para la configuración, pero es una problema que 
 no hubiera existido en un despliegue en el que hubiera tenido más control, pudiendo haber usado _pm2_, _NginX_, _Apache_, etc..
 4. Las tareas deben ejecutarse automáticamente si todas sus dependencias están completadas y la fecha startAt (si existe) ya ha llegado. Solo pueden ejecutarse 3 tareas al mismo tiempo (concurrencia máxima).
+5. Testing completo.

@@ -5,7 +5,7 @@ import { NotificationAlert } from '../types/notification-alert';
 @Injectable({
   providedIn: 'root',
 })
-export class Notifications {
+export class NotificationsService {
   private cleanupInterval: NodeJS.Timeout | null = null;
   private readonly notifications = signal<NotificationAlert[]>([]);
   readonly notifications$ = this.notifications.asReadonly();

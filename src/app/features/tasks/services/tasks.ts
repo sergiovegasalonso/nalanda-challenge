@@ -1,9 +1,9 @@
 import { Observable, Subject, of, throwError, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Priority } from '../../types/priority.enum';
-import { Status } from '../../types/status.enum';
-import { Task } from '../../types/task';
+import { Priority } from '../types/priority.enum';
+import { Status } from '../types/status.enum';
+import { Task } from '../types/task';
 
 @Injectable({
   providedIn: 'root',

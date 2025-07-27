@@ -1,12 +1,15 @@
-import { Notifications } from './notifications';
+import { NotificationsService } from './notifications';
 import { TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('Notifications', () => {
-  let service: Notifications;
+  let service: NotificationsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Notifications);
+    TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
+    });
+    service = TestBed.inject(NotificationsService);
   });
 
   it('should be created', () => {

@@ -24,14 +24,14 @@ import { FormsModule } from '@angular/forms';
 import { Heading2 } from '@shared/components/headings/heading-2/heading-2';
 import { Loader } from '@shared/components/loader/loader';
 import { LoaderSize } from '@shared/types/loader/loader-size.enum';
-import { Notifications } from '@features/notifications/services/notifications';
+import { NotificationsService } from '@features/notifications/services/notifications';
 import { Paragraph } from '@shared/components/paragraph/paragraph';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Table } from '@shared/components/table/table';
 import { TableModifier } from '@shared/types/table/table-modifier.enum';
 import { Task } from '../../types/task';
-import { TasksService } from '../../services/tasks/tasks';
+import { TasksService } from '../../services/tasks';
 import { XMarkIcon } from '@shared/components/icons/x-mark-icon/x-mark-icon';
 import { finalize } from 'rxjs/operators';
 import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
@@ -62,7 +62,7 @@ export class TasksTable implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
   private readonly tasksService = inject(TasksService);
-  private readonly notificationsService = inject(Notifications);
+  private readonly notificationsService = inject(NotificationsService);
   private readonly tasksSubject = new BehaviorSubject<Task[]>([]);
 
   BadgeColor = BadgeColor;
