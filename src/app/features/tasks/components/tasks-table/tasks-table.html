@@ -5,13 +5,6 @@
 >
   Add random task
 </nlnd-button>
-<nlnd-button
-  [buttonType]="ButtonType.Info"
-  (click)="showRandomNotification()"
-  ariaLabel="Show random notification"
->
-  Show Random Notification
-</nlnd-button>
 <nlnd-break-line />
 <nlnd-break-line />
 @if (loading()) {
@@ -91,7 +84,7 @@
                     : ButtonBehaviour.Disabled
                 "
                 ariaLabel="Restart task"
-                (click)="restartTask(task.id)"
+                (click)="runTask(task.id)"
               >
                 <nlnd-arrow-path-icon />
               </nlnd-button>

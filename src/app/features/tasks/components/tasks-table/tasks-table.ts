@@ -90,29 +90,28 @@ export class TasksTable implements OnInit, OnDestroy {
 
   addRandomTask(): void {
     this.tasksService.addRandomTask().subscribe({
-      next: () => {
+      next: (taskCreated) => {
         this.getTasks();
+        this.notificationsService.showSuccess(
+          `Task #${taskCreated.id} created successfully`,
+        );
       },
       error: (error) => {
-        console.error('Error adding random task:', error);
+        this.notificationsService.showError(error.message);
       },
     });
   }
 
   cancelTask(taskId: number): void {
-    console.log('Cancelling task with ID:', taskId);
-    const task = this.tasksSubject.value.find((t) => t.id === taskId);
-    if (!task) {
-      console.warn('Task not found');
-      return;
-    }
-
-    this.tasksService.cancelTask(task.id).subscribe({
+    this.tasksService.cancelTask(taskId).subscribe({
       next: () => {
-        this.getTasks(); // Refresh the tasks list
+        this.getTasks();
+        this.notificationsService.showSuccess(
+          `Task #${taskId} cancelled successfully`,
+        );
       },
       error: (error) => {
-        console.error('Error cancelling task:', error);
+        this.notificationsService.showError(error.message);
       },
     });
   }
@@ -123,31 +122,24 @@ export class TasksTable implements OnInit, OnDestroy {
     this.closeModal();
   }
 
-  restartTask(taskId: number): void {
-    console.log('Restarting task with ID:', taskId);
-    this.tasksService.restartTask(taskId).subscribe({
-      next: (restartedTask) => {
-        this.getTasks();
-        this.tasksService
-          .simulateTaskExecution(restartedTask.id)
-          .pipe(
-            finalize(() => {
-              this.getTasks();
-            }),
-          )
-          .subscribe({
-            next: () => {
-              console.log('Task execution simulated successfully');
-            },
-            error: (error) => {
-              console.error('Error simulating task execution:', error);
-            },
-          });
-      },
-      error: (error) => {
-        console.error('Error restarting task:', error);
-      },
-    });
+  runTask(taskId: number): void {
+    this.tasksService
+      .runTask(taskId)
+      .pipe(
+        finalize(() => {
+          this.getTasks();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.notificationsService.showSuccess(
+            `Task #${taskId} completed successfully`,
+          );
+        },
+        error: (error) => {
+          this.notificationsService.showError(error.message);
+        },
+      });
   }
 
   submitTaskEdition(): void {
@@ -161,35 +153,43 @@ export class TasksTable implements OnInit, OnDestroy {
       startAt: new Date(this.startAtDate()!),
     };
 
-    this.tasksService.updateTask(updatedTask).subscribe({
-      next: (updatedTask) => {
-        this.getTasks();
-        this.taskToEdit.set(null);
-        this.startAtDate.set(null);
-        this.closeModal();
-        if (updatedTask.status === Status.InProgress) {
-          this.tasksService
-            .simulateTaskExecution(updatedTask.id)
-            .pipe(
-              finalize(() => {
-                this.getTasks();
-              }),
-            )
-            .subscribe({
-              next: () => {
-                console.log('Task execution simulated successfully');
-              },
-              error: (error) => {
-                console.error('Error simulating task execution:', error);
-              },
-            });
-        }
-      },
-      error: (error) => {
-        console.error('Error updating task:', error);
-        this.closeModal();
-      },
-    });
+    this.tasksService
+      .updateTask(updatedTask)
+      .pipe(
+        finalize(() => {
+          this.getTasks();
+          this.taskToEdit.set(null);
+          this.startAtDate.set(null);
+          this.closeModal();
+        }),
+      )
+      .subscribe({
+        next: (updatedTask) => {
+          if (updatedTask.startAt && updatedTask.startAt < new Date()) {
+            this.tasksService
+              .runTask(updatedTask.id)
+              .pipe(
+                finalize(() => {
+                  this.getTasks();
+                }),
+              )
+              .subscribe({
+                next: () => {
+                  console.log('Task execution simulated successfully');
+                  this.notificationsService.showSuccess(
+                    `Task #${updatedTask.id} completed successfully`,
+                  );
+                },
+                error: (error) => {
+                  this.notificationsService.showError(error.message);
+                },
+              });
+          }
+        },
+        error: (error) => {
+          this.notificationsService.showError(error.message);
+        },
+      });
   }
 
   getBadgeColorByPriority(priority: number): BadgeColor {
@@ -248,15 +248,17 @@ export class TasksTable implements OnInit, OnDestroy {
 
   private getTasks() {
     this.loading.set(true);
-    this.tasksService.getAllTasks().subscribe({
-      next: (tasks) => {
-        this.tasksSubject.next(tasks);
-        this.loading.set(false);
-      },
-      error: (error) => {
-        console.error('Error fetching tasks:', error);
-      },
-    });
+    this.tasksService
+      .getAllTasks()
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (tasks) => {
+          this.tasksSubject.next(tasks);
+        },
+        error: (error) => {
+          this.notificationsService.showError(error.message);
+        },
+      });
   }
 
   private getTaskNameById(id: number): string {
@@ -266,24 +268,5 @@ export class TasksTable implements OnInit, OnDestroy {
 
   private openModal(): void {
     this.modal.nativeElement.showModal();
-  }
-
-  showRandomNotification(): void {
-    const messages = [
-      'Task completed successfully!',
-      'Warning: Task execution delayed',
-      'Error: Task failed to complete',
-      'Info: New task dependency added',
-    ];
-
-    const methods = [
-      () => this.notificationsService.showSuccess(messages[0]),
-      () => this.notificationsService.showWarning(messages[1]),
-      () => this.notificationsService.showError(messages[2]),
-      () => this.notificationsService.showInfo(messages[3]),
-    ];
-
-    const randomIndex = Math.floor(Math.random() * methods.length);
-    methods[randomIndex]();
   }
 }

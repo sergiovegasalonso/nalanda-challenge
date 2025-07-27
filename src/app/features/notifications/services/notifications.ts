@@ -10,6 +10,8 @@ export class Notifications {
   private readonly notifications = signal<NotificationAlert[]>([]);
   readonly notifications$ = this.notifications.asReadonly();
 
+  REFRESH_INTERVAL = 3000;
+
   clearAll(): void {
     this.notifications.set([]);
     this.stopCleanupInterval();
@@ -58,7 +60,9 @@ export class Notifications {
       console.log('notifications:');
       const now = Date.now();
       const current = this.notifications();
-      const filtered = current.filter((n) => now - n.timestamp < 5000);
+      const filtered = current.filter(
+        (n) => now - n.timestamp < this.REFRESH_INTERVAL,
+      );
 
       if (filtered.length !== current.length) {
         this.notifications.set(filtered);

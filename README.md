@@ -24,14 +24,16 @@ Disculpen si hay algún error, he intentado ir la más rápido posible compagin�
 
 Muchas gracias.
 
+## Cosas que no se han desrrollado por falta de tiempo
+
+1. Un buen sistema de _i18n_ para tener todos las cadenas de texto localizadas y con la posibilidad de ser traducidas.
+2. El sistema de prioridades no lo he entendido.
+3. No he aplicado optimización usando _SSR_ y _prerendering_ porque _Vercel_ me estaba dando problemas para la configuración, pero es una problema que 
+no hubiera existido en un despliegue en el que hubiera tenido más control, pudiendo haber usado _pm2_, _NginX_, _Apache_, etc..
 
 
 
 
-
-# Nalanda's Challenge
-
-Este repositorio está desplegado en _Vercel_, usted puede comprobar el despliegue _[aquí](https://nalanda-challenge.vercel.app/)_.
 
 ## Pending tasks
 
@@ -41,22 +43,7 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 * hacer que no fallen los not found, como en sergiovegasalonso.lab
 * tests de todo y unificar criterio
 * refactorizar todo!!!!!!!!!!!!!!!
-* in progress
-* <!-- TODO: Replace with nlnd-date-input -->
 * date input no se borra cuando se cancela
-
-## Qué contiene la solución (TODO: explicar bien)
-
-0. COmienzo...cambiando la fecha de inicio a un día anterior o igual a hoy
-1. Pre commit con husky laxo para mejorar la experiencia de desarrollo
-2. eslint para mejorar la calidad del código
-3. Prettier para...
-4. Ejemplo de github action que ejecuta los tests en modo sin interfaz con integración con vercel
-5. tailwind and daysiui for basic theming
-6. pagespeed todo al 100
-7. revisar el router
-8. Rutas relativas y absolutas explicación
-9. transfer stated problem with vercel
 
 ## OK
 
@@ -75,9 +62,9 @@ https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 ### Ejecución reactiva
  * Las tareas deben ejecutarse automáticamente si todas sus
 dependencias están completadas y la fecha startAt (si existe) ya ha
-llegado.Solo pueden ejecutarse 3 tareas al mismo tiempo (concurrencia
+llegado. Solo pueden ejecutarse 3 tareas al mismo tiempo (concurrencia
 máxima).
-* Se debe respetar la prioridad (1 > 2 > 3…).
+* [OK] Se debe respetar la prioridad (1 > 2 > 3…).
 * [OK] Cada tarea se ejecuta con timer(duracion) .
 * [OK] Las tareas se podrán renovar modificando su propiedad startAt.
 
@@ -91,7 +78,7 @@ marcarse como "bloqueada".
 ### Streams en vivo
 
 * [OK] Exponer un Observable con el estado actual de todas las tareas.
-* Exponer un Observable con alertas del sistema:
-  * "Tarea X bloqueada".
-  * "Demasiadas tareas de prioridad alta pendientes".
-  * "Sistema inactivo".
+* [OK] Exponer un Observable con alertas del sistema:
+  * [OK] "Tarea X bloqueada".
+  * [OK] "Demasiadas tareas de prioridad alta pendientes".
+  * [OK] "Sistema inactivo".
