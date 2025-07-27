@@ -215,7 +215,26 @@ export class TasksService {
     const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
 
     if (taskIndex === -1) {
-      return throwError(() => new Error('Task not found'));
+      return throwError(() => new Error(`Task ${taskId} not found`));
+    }
+
+    const targetTask = this.mockTasks[taskIndex];
+
+    const allDependenciesCompleted =
+      !targetTask.dependsOn?.length ||
+      targetTask.dependsOn.every(
+        (depId) =>
+          this.mockTasks.find((t) => t.id === depId)?.status ===
+          Status.Completed,
+      );
+
+    if (!allDependenciesCompleted) {
+      return throwError(
+        () =>
+          new Error(
+            `Task ${taskId} cannot be started due to incomplete dependencies`,
+          ),
+      );
     }
 
     const task = this.mockTasks[taskIndex];
@@ -289,15 +308,15 @@ export class TasksService {
     );
   }
 
-  updateTask(updatedTask: Task): Observable<Task> {
-    const taskIndex = this.mockTasks.findIndex((t) => t.id === updatedTask.id);
+  updateTask(task: Task): Observable<Task> {
+    const taskIndex = this.mockTasks.findIndex((t) => t.id === task.id);
 
     if (taskIndex === -1) {
-      return throwError(() => new Error(`Task ${updatedTask.id} not found`));
+      return throwError(() => new Error(`Task ${task.id} not found`));
     }
 
-    this.mockTasks[taskIndex] = updatedTask;
+    this.mockTasks[taskIndex] = task;
 
-    return of(updatedTask);
+    return of(task);
   }
 }

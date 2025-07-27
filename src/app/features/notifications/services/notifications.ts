@@ -48,14 +48,12 @@ export class Notifications {
   removeNotification(id: string): void {
     this.notifications.set(this.notifications().filter((n) => n.id !== id));
 
-    // Stop interval if no notifications remain
     if (this.notifications().length === 0) {
       this.stopCleanupInterval();
     }
   }
 
   private startCleanupInterval(): void {
-    // Only start if not already running
     this.cleanupInterval ??= setInterval(() => {
       console.log('notifications:');
       const now = Date.now();
@@ -68,7 +66,6 @@ export class Notifications {
         this.notifications.set(filtered);
       }
 
-      // Stop interval if no notifications remain
       if (filtered.length === 0) {
         this.stopCleanupInterval();
       }
