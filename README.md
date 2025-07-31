@@ -1,34 +1,23 @@
-# Nalanda's Challenge
+# sergio's scalable project
 
-Este repositorio está desplegado en _Vercel_, usted puede comprobar el despliegue _[aquí](https://nalanda-challenge.vercel.app/)_.
+// TODO
 
-## Descripción
+## description
 
+// TODO: when change domain
 El proyecto se puede probar ejecutando con ```npm install``` y ```npm start```, o en _[Vercel](https://nalanda-challenge.vercel.app/)_.
 
-Cuenta con las siguientes buenas prácticas.
+## pending tasks
 
-1. Integración continua con _pipelines_ de _GitHub_ (_GitHub Actions_), tanto cuando se hace una _pull request_ como un _push_ en _main_.
-2. Despliegue continuo gracias a _Vercel_.
-3. Comprobación de que el código está listo para ser subido gracias _Husky_, _ESLInt_ y _Prettier_, que se ejecutan en el _hook_ _precommit_.
-4. Comprobación del formato de código con _Prettier_.
-5. Comprobación de buenas prácticas y posibles mejoras con _ESLint_, comprobando hasta cosas como el orden de los _imports_ y los prefijos de los componentes.
-6. División de la carpeta _app_ en carpetas y módulos que mejoran la escalabilidad (en cada carpeta hay un README.md) que explica la responsabilidad de cada sección. 
-Esta es una división que a mí me gusta pero que no es el único enfoque.
-7. Se ha usado por facilidad de uso y rapidez _TailwindCSS_ con _DaysiUI_, con un un sistema de configuración programática de los componentes de este último, todo en su carpeta correspondiente _shared_.
-8. El enfoque utilizado ha sido crear un servicio _TaskService_ encargado de simular llamadas a _endpoints_ para manejar la reactividad.
-9. Testing de los componentes.
-10. En _PageSpeed Insights_ obtengo una puntuación de 99 (_Performance_) 100 (B_est Practices_) 100 (_SEO_) 100 (_Accesibility_). No me ha dado tiempo a mejorar la _performance_ para obtener un 100.
-
-Disculpen si hay algún error, he intentado ir la más rápido posible compaginándolo con el trabajo.
-
-Muchas gracias.
-
-## Cosas que no se han desrrollado por falta de tiempo
-
-1. Un buen sistema de _i18n_ para tener todos las cadenas de texto localizadas y con la posibilidad de ser traducidas.
-2. El sistema de prioridades no lo he entendido.
-3. No he aplicado optimización usando _SSR_ y _prerendering_ porque _Vercel_ me estaba dando problemas para la configuración, pero es una problema que 
-no hubiera existido en un despliegue en el que hubiera tenido más control, pudiendo haber usado _pm2_, _NginX_, _Apache_, etc..
-4. Las tareas deben ejecutarse automáticamente si todas sus dependencias están completadas y la fecha startAt (si existe) ya ha llegado. Solo pueden ejecutarse 3 tareas al mismo tiempo (concurrencia máxima).
-5. Testing completo.
+1. creating own neobrutalism design system (removing TailwindCSS and DaysiUI).
+2. rethinking solution.
+3. create solution as template.
+4. create my own JavaScript library while develop
+5. SSR like sva lab
+6. Defers and incremental hydration
+7. CHECK CLASSIC FOR PERFORMANCE AND REPLACE IF 
+9. i18n with button like sva lab
+10. change theme modes with button like sva lab
+11. all tests
+12. real api
+13. pagination and order by column and filter
