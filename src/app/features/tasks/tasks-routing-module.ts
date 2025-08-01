@@ -9,7 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'tasks/task-manager',
-    title: 'Nalanda Challenge - Task Manager',
+    title: 'Task Manager',
     loadComponent: () =>
       import('./views/task-manager/task-manager').then((c) => c.TaskManager),
   },

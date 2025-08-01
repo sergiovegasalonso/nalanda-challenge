@@ -2,14 +2,24 @@
 <html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
-    <title>Nalanda Challenge</title>
-    <meta name="description" content="Nalanda Challenge." />
+    <title>sva - angular</title>
+    <meta name="description" content="Angular project." />
     <meta name="author" content="Sergio Vegas Alonso" />
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <script type="module">
+      document.documentElement.classList.toggle(
+        "dark",
+        localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches),
+      );
+    </script>
   </head>
-  <body>
+  <body
+    class="bg-light-background dark:bg-dark-background px-4 lg:px-8 2xl:px-56"
+  >
     <sva-root></sva-root>
   </body>
 </html>

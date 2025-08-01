@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nalanda-challenge": {
+    "sva-angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "nalanda-challenge:build:production"
+              "buildTarget": "sva-angular:build:production"
             },
             "development": {
-              "buildTarget": "nalanda-challenge:build:development"
+              "buildTarget": "sva-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
