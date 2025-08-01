@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-page-not-found',
+  selector: 'sva-page-not-found',
   standalone: true,
   imports: [],
   templateUrl: './page-not-found.html',

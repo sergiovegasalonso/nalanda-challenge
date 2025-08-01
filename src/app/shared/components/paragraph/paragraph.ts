@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-paragraph',
+  selector: 'sva-paragraph',
   imports: [],
   templateUrl: './paragraph.html',
 })

@@ -3,7 +3,7 @@ import { TableModifier } from '@shared/types/table/table-modifier.enum';
 import { TableSize } from '@shared/types/table/table-size.enum';
 
 @Component({
-  selector: 'nlnd-table',
+  selector: 'sva-table',
   standalone: true,
   imports: [],
   templateUrl: './table.html',

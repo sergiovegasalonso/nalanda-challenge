@@ -4,19 +4,19 @@
 >
   @switch (alertColor()) {
     @case (AlertColor.Error) {
-      <nlnd-x-circle-icon />
+      <sva-x-circle-icon />
     }
     @case (AlertColor.Info) {
-      <nlnd-info-icon />
+      <sva-info-icon />
     }
     @case (AlertColor.Success) {
-      <nlnd-check-badge-icon />
+      <sva-check-badge-icon />
     }
     @case (AlertColor.Warning) {
-      <nlnd-exclamation-tringle-icon />
+      <sva-exclamation-tringle-icon />
     }
     @default {
-      <nlnd-info-icon />
+      <sva-info-icon />
     }
   }
   <span><ng-content>badge text fallback</ng-content></span>

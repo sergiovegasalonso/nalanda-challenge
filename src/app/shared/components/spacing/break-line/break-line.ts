@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-break-line',
+  selector: 'sva-break-line',
   imports: [],
   templateUrl: './break-line.html',
 })

@@ -1,16 +1,16 @@
-<nlnd-button
+<sva-button
   [buttonType]="ButtonType.Primary"
   (click)="addRandomTask()"
   ariaLabel="Add random task"
 >
   Add random task
-</nlnd-button>
-<nlnd-break-line />
-<nlnd-break-line />
+</sva-button>
+<sva-break-line />
+<sva-break-line />
 @if (loading()) {
-  <nlnd-loader />
+  <sva-loader />
 } @else {
-  <nlnd-table [tableModifier]="TableModifier.Zebra">
+  <sva-table [tableModifier]="TableModifier.Zebra">
     <thead>
       <tr>
         <th id="id" class="w-6">Id</th>
@@ -35,32 +35,32 @@
             <td>{{ task.title }}</td>
             <td>{{ task.description }}</td>
             <td>
-              <nlnd-badge
+              <sva-badge
                 [badgeColor]="getBadgeColorByPriority(task.priority)"
                 [badgeSize]="BadgeSize.Medium"
                 [badgeStyle]="BadgeStyle.None"
               >
                 {{ getPriorityNameByValue(task.priority) }}
-              </nlnd-badge>
+              </sva-badge>
             </td>
             <td>
-              <nlnd-badge
+              <sva-badge
                 [badgeColor]="getBadgeColorByStatus(task.status)"
                 [badgeSize]="BadgeSize.Medium"
                 [badgeStyle]="BadgeStyle.None"
               >
                 {{ getStatusNameByValue(task.status) }}
                 @if (task.status === Status.InProgress) {
-                  <nlnd-loader [loaderSize]="LoaderSize.ExtraSmall" />
+                  <sva-loader [loaderSize]="LoaderSize.ExtraSmall" />
                 }
-              </nlnd-badge>
+              </sva-badge>
             </td>
             <td>{{ getRelatedTaskNames(task.dependsOn) }}</td>
             <td>{{ task.startAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
             <td>{{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}</td>
             <td>{{ task.blockReason }}</td>
             <td>
-              <nlnd-button
+              <sva-button
                 [buttonType]="ButtonType.Primary"
                 [buttonBehaviour]="
                   task.status !== Status.InProgress
@@ -70,11 +70,11 @@
                 ariaLabel="Edit task start at date"
                 (click)="startTaskEdition(task)"
               >
-                <nlnd-calendar-days-icon />
-              </nlnd-button>
+                <sva-calendar-days-icon />
+              </sva-button>
             </td>
             <td>
-              <nlnd-button
+              <sva-button
                 [buttonType]="ButtonType.Info"
                 [buttonBehaviour]="
                   task.attempts <= 2 &&
@@ -86,11 +86,11 @@
                 ariaLabel="Restart task"
                 (click)="runTask(task.id)"
               >
-                <nlnd-arrow-path-icon />
-              </nlnd-button>
+                <sva-arrow-path-icon />
+              </sva-button>
             </td>
             <td>
-              <nlnd-button
+              <sva-button
                 [buttonType]="ButtonType.Error"
                 [buttonBehaviour]="
                   task.status === Status.InProgress
@@ -100,8 +100,8 @@
                 ariaLabel="Cancel task"
                 (click)="cancelTask(task.id)"
               >
-                <nlnd-x-mark-icon />
-              </nlnd-button>
+                <sva-x-mark-icon />
+              </sva-button>
             </td>
           </tr>
         }
@@ -111,33 +111,33 @@
         </tr>
       }
     </tbody>
-  </nlnd-table>
+  </sva-table>
 }
 
 <dialog #modal id="modal" class="modal">
   <div class="modal-box">
-    <nlnd-heading-2>{{ taskToEdit()?.title }}</nlnd-heading-2>
-    <nlnd-break-line />
-    <nlnd-paragraph>Insert startAt date:</nlnd-paragraph>
-    <nlnd-break-line />
-    <nlnd-break-line />
-    <nlnd-date-input [(ngModel)]="startAtDate" ngDefaultControl />
+    <sva-heading-2>{{ taskToEdit()?.title }}</sva-heading-2>
+    <sva-break-line />
+    <sva-paragraph>Insert startAt date:</sva-paragraph>
+    <sva-break-line />
+    <sva-break-line />
+    <sva-date-input [(ngModel)]="startAtDate" ngDefaultControl />
     <div class="modal-action">
       <form method="dialog" class="w-full flex justify-between">
-        <nlnd-button
+        <sva-button
           [buttonType]="ButtonType.Primary"
           ariaLabel="Save task edition"
           (click)="submitTaskEdition()"
         >
           Save
-        </nlnd-button>
-        <nlnd-button
+        </sva-button>
+        <sva-button
           [buttonType]="ButtonType.Ghost"
           ariaLabel="Cancel task edition"
           (click)="cancelTaskEdition()"
         >
           Cancel
-        </nlnd-button>
+        </sva-button>
       </form>
     </div>
   </div>

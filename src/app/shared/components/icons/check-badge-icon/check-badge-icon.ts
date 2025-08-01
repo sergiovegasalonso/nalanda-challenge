@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-check-badge-icon',
+  selector: 'sva-check-badge-icon',
   standalone: true,
   imports: [],
   templateUrl: './check-badge-icon.html',

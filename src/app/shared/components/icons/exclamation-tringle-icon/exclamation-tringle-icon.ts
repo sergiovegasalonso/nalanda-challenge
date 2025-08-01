@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-exclamation-tringle-icon',
+  selector: 'sva-exclamation-tringle-icon',
   standalone: true,
   imports: [],
   templateUrl: './exclamation-tringle-icon.html',

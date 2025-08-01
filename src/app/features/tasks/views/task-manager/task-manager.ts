@@ -4,7 +4,7 @@ import { Heading1 } from '@shared/components/headings/heading-1/heading-1';
 import { TasksTable } from '../../components/tasks-table/tasks-table';
 
 @Component({
-  selector: 'nlnd-task-manager',
+  selector: 'sva-task-manager',
   standalone: true,
   imports: [TasksTable, BreakLine, Heading1],
   templateUrl: './task-manager.html',

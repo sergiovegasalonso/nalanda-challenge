@@ -37,7 +37,7 @@ import { finalize } from 'rxjs/operators';
 import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
 
 @Component({
-  selector: 'nlnd-tasks-table',
+  selector: 'sva-tasks-table',
   standalone: true,
   imports: [
     AsyncPipe,

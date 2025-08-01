@@ -3,7 +3,7 @@ import { ButtonBehaviour } from '@shared/types/buttons/button-behaviour.enum';
 import { ButtonType } from '@shared/types/buttons/button-type.enum';
 
 @Component({
-  selector: 'nlnd-button',
+  selector: 'sva-button',
   standalone: true,
   imports: [],
   templateUrl: './button.html',

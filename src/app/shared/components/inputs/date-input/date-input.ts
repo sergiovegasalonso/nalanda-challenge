@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'nlnd-date-input',
+  selector: 'sva-date-input',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './date-input.html',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nlnd-info-icon',
+  selector: 'sva-info-icon',
   standalone: true,
   imports: [],
   templateUrl: './info-icon.html',

@@ -8,7 +8,7 @@ import { InfoIcon } from '@shared/components/icons/info-icon/info-icon';
 import { XCircleIcon } from '@shared/components/icons/x-circle-icon/x-circle-icon';
 
 @Component({
-  selector: 'nlnd-alert',
+  selector: 'sva-alert',
   standalone: true,
   imports: [XCircleIcon, CheckBadgeIcon, InfoIcon, ExclamationTringleIcon],
   templateUrl: './alert.html',

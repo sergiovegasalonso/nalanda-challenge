@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { LoaderSize } from '@shared/types/loader/loader-size.enum';
 
 @Component({
-  selector: 'nlnd-loader',
+  selector: 'sva-loader',
   standalone: true,
   imports: [],
   templateUrl: './loader.html',

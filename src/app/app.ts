@@ -4,7 +4,7 @@ import { NotificationsCenter } from './features/notifications/components/notific
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'nlnd-root',
+  selector: 'sva-root',
   standalone: true,
   imports: [RouterOutlet, Header, NotificationsCenter],
   templateUrl: './app.html',

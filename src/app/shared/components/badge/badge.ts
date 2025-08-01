@@ -4,7 +4,7 @@ import { BadgeSize } from '@shared/types/badge/badge-size.enum';
 import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
 
 @Component({
-  selector: 'nlnd-badge',
+  selector: 'sva-badge',
   standalone: true,
   imports: [],
   templateUrl: './badge.html',

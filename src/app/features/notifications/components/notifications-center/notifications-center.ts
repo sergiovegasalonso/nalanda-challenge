@@ -4,7 +4,7 @@ import { BreakLine } from '@shared/components/spacing/break-line/break-line';
 import { NotificationsService } from '../../services/notifications';
 
 @Component({
-  selector: 'nlnd-notifications-center',
+  selector: 'sva-notifications-center',
   standalone: true,
   imports: [Alert, BreakLine],
   templateUrl: './notifications-center.html',
