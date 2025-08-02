@@ -1,7 +1,5 @@
-import { Component, input } from '@angular/core';
-import { BadgeColor } from '@shared/types/badge/badge-color.enum';
-import { BadgeSize } from '@shared/types/badge/badge-size.enum';
-import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
+import { Component, computed, input } from '@angular/core';
+import { BadgeColor } from './configuration/badge-color.enum';
 
 @Component({
   selector: 'sva-badge',
@@ -9,6 +7,21 @@ import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
 })
 export class Badge {
   badgeColor = input(BadgeColor.Neutral);
-  badgeSize = input(BadgeSize.Medium);
-  badgeStyle = input(BadgeStyle.Outline);
+
+  getColorConfigurationClasses = computed(() => {
+    switch (this.badgeColor()) {
+      case BadgeColor.Blue:
+        return 'dfs';
+      case BadgeColor.Green:
+        return 'f';
+      case BadgeColor.Neutral:
+        return 'f';
+      case BadgeColor.Red:
+        return 'f';
+      case BadgeColor.Yellow:
+        return 'f';
+      default:
+        return 'fdsdf';
+    }
+  });
 }

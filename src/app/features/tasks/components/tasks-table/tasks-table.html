@@ -27,18 +27,12 @@
           <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
           <td class="w-36 text-center">
-            <sva-badge
-              [badgeColor]="getBadgeColorByPriority(task.priority)"
-              [badgeSize]="BadgeSize.Medium"
-              [badgeStyle]="BadgeStyle.None">
+            <sva-badge [badgeColor]="getBadgeColorByPriority(task.priority)">
               {{ getPriorityNameByValue(task.priority) }}
             </sva-badge>
           </td>
           <td class="w-36 text-center">
-            <sva-badge
-              [badgeColor]="getBadgeColorByStatus(task.status)"
-              [badgeSize]="BadgeSize.Medium"
-              [badgeStyle]="BadgeStyle.None">
+            <sva-badge [badgeColor]="getBadgeColorByStatus(task.status)">
               {{ getStatusNameByValue(task.status) }}
               @if (task.status === Status.InProgress) {
                 <sva-loader [loaderSize]="LoaderSize.ExtraSmall" />

@@ -2,24 +2,22 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-*: initial;
-
   --color-white: oklch(1 0 0);
   --color-black: oklch(0 0 0);
 
   --color-light-background: oklch(98.7% 0.022 95.277);
   --color-light-background-highlighted: oklch(96.2% 0.059 95.617);
-  --color-light-accent: oklch(88.5% 0.062 18.334);
+  --color-light-accent: oklch(90.1% 0.058 230.902);
   --color-light-accent-contrast: var(--color-black);
-  --color-light-accent-highlighted: oklch(80.8% 0.114 19.571);
+  --color-light-accent-highlighted: oklch(82.8% 0.111 230.318);
   --color-light-foreground: var(--color-white);
   --color-light-foreground-highlighted: oklch(0.9491 0 0);
 
   --color-dark-background: oklch(0.252 0 0);
   --color-dark-background-highlighted: oklch(37.4% 0.01 67.558);
-  --color-dark-accent: oklch(0.8403 0.1724 84.08);
-  --color-dark-accent-contrast: oklch(0.8403 0.1724 84.08);
-  --color-dark-accent-highlighted: oklch(0.8403 0.1724 84.08);
+  --color-dark-accent: oklch(89.2% 0.058 10.001);
+  --color-dark-accent-contrast: var(--color-black);
+  --color-dark-accent-highlighted: oklch(81% 0.117 11.638);
   --color-dark-foreground: oklch(0.3867 0 0);
   --color-dark-foreground-highlighted: oklch(0.3211 0 0);
 

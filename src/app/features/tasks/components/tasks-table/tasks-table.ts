@@ -12,9 +12,7 @@ import {
 import { AccentButton } from '@app/shared/components/buttons/accent-button/accent-button';
 import { ArrowPathIcon } from '@shared/components/icons/arrow-path-icon/arrow-path-icon';
 import { Badge } from '@shared/components/badge/badge';
-import { BadgeColor } from '@shared/types/badge/badge-color.enum';
-import { BadgeSize } from '@shared/types/badge/badge-size.enum';
-import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
+import { BadgeColor } from '@app/shared/components/badge/configuration/badge-color.enum';
 import { BreakLine } from '@shared/components/spacing/break-line/break-line';
 import { Button } from '@shared/components/buttons/button/button';
 import { ButtonBehaviour } from '@shared/types/buttons/button-behaviour.enum';
@@ -68,9 +66,6 @@ export class TasksTable implements OnInit, OnDestroy {
   private readonly notificationsService = inject(NotificationsService);
   private readonly tasksSubject = new BehaviorSubject<Task[]>([]);
 
-  BadgeColor = BadgeColor;
-  BadgeSize = BadgeSize;
-  BadgeStyle = BadgeStyle;
   ButtonBehaviour = ButtonBehaviour;
   ButtonType = ButtonType;
   LoaderSize = LoaderSize;
@@ -198,32 +193,32 @@ export class TasksTable implements OnInit, OnDestroy {
   getBadgeColorByPriority(priority: number): BadgeColor {
     switch (priority) {
       case Priority.High:
-        return BadgeColor.Error;
+        return BadgeColor.Red;
       case Priority.Medium:
-        return BadgeColor.Warning;
+        return BadgeColor.Yellow;
       case Priority.Low:
-        return BadgeColor.Success;
+        return BadgeColor.Green;
       default:
-        return BadgeColor.Success;
+        return BadgeColor.Neutral;
     }
   }
 
   getBadgeColorByStatus(status: number): BadgeColor {
     switch (status) {
       case Status.New:
-        return BadgeColor.Accent;
+        return BadgeColor.Neutral;
       case Status.InProgress:
-        return BadgeColor.Info;
+        return BadgeColor.Blue;
       case Status.Completed:
-        return BadgeColor.Success;
+        return BadgeColor.Green;
       case Status.Cancelled:
-        return BadgeColor.Error;
+        return BadgeColor.Yellow;
       case Status.Blocked:
-        return BadgeColor.Warning;
+        return BadgeColor.Yellow;
       case Status.Failed:
-        return BadgeColor.Error;
+        return BadgeColor.Red;
       default:
-        return BadgeColor.Accent;
+        return BadgeColor.Neutral;
     }
   }
 

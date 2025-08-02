@@ -1,6 +1,6 @@
 <button
   class="inline-flex border border-black p-2 transition-colors"
-  [class]="configurationClasses()"
+  [class]="`${getBehaviourConfigurationClasses()}`"
   type="button"
   [attr.aria-label]="ariaLabel()"
   [disabled]="isDisabled()">

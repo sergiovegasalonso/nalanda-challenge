@@ -10,7 +10,7 @@ export class AccentButton {
   ButtonBehaviour = ButtonBehaviour;
   buttonBehaviour = input(ButtonBehaviour.Active);
 
-  configurationClasses = computed(() => {
+  getBehaviourConfigurationClasses = computed(() => {
     switch (this.buttonBehaviour()) {
       case ButtonBehaviour.Active:
         return 'cursor-pointer bg-light-accent text-light-accent-contrast shadow-md hover:bg-light-accent-highlighted dark:bg-dark-accent dark:text-dark-accent-contrast dark:hover:bg-dark-accent-highlighted';

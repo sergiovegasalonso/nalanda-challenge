@@ -1,13 +1,15 @@
 <table
   class="w-full border-collapse bg-light-foreground shadow-md dark:bg-dark-foreground">
   <thead>
-    <tr class="[&_th]:border [&_th]:p-2">
+    <tr
+      class="[&_th]:border [&_th]:border-black [&_th]:p-2 [&_th]:text-black dark:[&_th]:text-white">
       <ng-content select="[header]">
         <th id="id">header fallback</th>
       </ng-content>
     </tr>
   </thead>
-  <tbody class="[&_td]:border [&_td]:p-2">
-    <ng-content> body fallback </ng-content>
+  <tbody
+    class="[&_td]:border [&_td]:border-black [&_td]:p-2 [&_td]:text-black dark:[&_td]:text-white">
+    <ng-content> body fallback</ng-content>
   </tbody>
 </table>

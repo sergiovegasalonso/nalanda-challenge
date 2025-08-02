@@ -10,7 +10,7 @@ export class Button {
   ButtonBehaviour = ButtonBehaviour;
   buttonBehaviour = input(ButtonBehaviour.Active);
 
-  configurationClasses = computed(() => {
+  getBehaviourConfigurationClasses = computed(() => {
     switch (this.buttonBehaviour()) {
       case ButtonBehaviour.Active:
         return 'cursor-pointer bg-light-foreground text-black shadow-md hover:bg-light-foreground-highlighted dark:bg-dark-foreground dark:text-white dark:hover:bg-dark-foreground-highlighted';
