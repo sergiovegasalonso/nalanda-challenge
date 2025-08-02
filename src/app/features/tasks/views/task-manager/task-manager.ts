@@ -5,7 +5,6 @@ import { TasksTable } from '../../components/tasks-table/tasks-table';
 
 @Component({
   selector: 'sva-task-manager',
-  standalone: true,
   imports: [TasksTable, BreakLine, Heading1],
   templateUrl: './task-manager.html',
 })

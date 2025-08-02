@@ -9,6 +9,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { AccentButton } from '@app/shared/components/buttons/accent-button/accent-button';
 import { ArrowPathIcon } from '@shared/components/icons/arrow-path-icon/arrow-path-icon';
 import { Badge } from '@shared/components/badge/badge';
 import { BadgeColor } from '@shared/types/badge/badge-color.enum';
@@ -26,6 +27,7 @@ import { Loader } from '@shared/components/loader/loader';
 import { LoaderSize } from '@shared/types/loader/loader-size.enum';
 import { NotificationsService } from '@features/notifications/services/notifications';
 import { Paragraph } from '@shared/components/paragraph/paragraph';
+import { PlusCircleIcon } from '@app/shared/components/icons/plus-circle-icon/plus-circle-icon';
 import { Priority } from '../../types/priority.enum';
 import { Status } from '../../types/status.enum';
 import { Table } from '@shared/components/table/table';
@@ -38,7 +40,6 @@ import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
 
 @Component({
   selector: 'sva-tasks-table',
-  standalone: true,
   imports: [
     AsyncPipe,
     DatePipe,
@@ -54,6 +55,8 @@ import { getEnumNameByValue } from '@shared/helpers/get-enum-name-by-value';
     Badge,
     CalendarDaysIcon,
     Table,
+    AccentButton,
+    PlusCircleIcon,
   ],
   templateUrl: './tasks-table.html',
 })

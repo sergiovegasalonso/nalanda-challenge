@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'sva-date-input',
-  standalone: true,
   imports: [FormsModule],
   templateUrl: './date-input.html',
 })

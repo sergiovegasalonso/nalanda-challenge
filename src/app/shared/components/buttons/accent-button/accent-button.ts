@@ -2,10 +2,10 @@ import { Component, computed, input } from '@angular/core';
 import { ButtonBehaviour } from '@shared/types/buttons/button-behaviour.enum';
 
 @Component({
-  selector: 'sva-button',
-  templateUrl: './button.html',
+  selector: 'sva-accent-button',
+  templateUrl: './accent-button.html',
 })
-export class Button {
+export class AccentButton {
   ariaLabel = input<string | undefined>('Button description');
   ButtonBehaviour = ButtonBehaviour;
   buttonBehaviour = input(ButtonBehaviour.Active);
@@ -13,7 +13,7 @@ export class Button {
   configurationClasses = computed(() => {
     switch (this.buttonBehaviour()) {
       case ButtonBehaviour.Active:
-        return 'cursor-pointer bg-light-foreground text-light-foreground-contrast shadow-md hover:bg-light-foreground-highlighted dark:bg-dark-foreground dark:text-dark-foreground-contrast dark:hover:bg-dark-foreground-highlighted';
+        return 'cursor-pointer bg-light-accent text-light-accent-contrast shadow-md hover:bg-light-accent-highlighted dark:bg-dark-accent dark:text-dark-accent-contrast dark:hover:bg-dark-accent-highlighted';
       case ButtonBehaviour.Disabled:
         return 'cursor-not-allowed opacity-50';
       default:

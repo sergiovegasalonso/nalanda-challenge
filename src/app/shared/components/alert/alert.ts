@@ -9,7 +9,6 @@ import { XCircleIcon } from '@shared/components/icons/x-circle-icon/x-circle-ico
 
 @Component({
   selector: 'sva-alert',
-  standalone: true,
   imports: [XCircleIcon, CheckBadgeIcon, InfoIcon, ExclamationTringleIcon],
   templateUrl: './alert.html',
 })

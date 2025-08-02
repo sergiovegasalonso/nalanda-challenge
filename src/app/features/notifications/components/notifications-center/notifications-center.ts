@@ -5,7 +5,6 @@ import { NotificationsService } from '../../services/notifications';
 
 @Component({
   selector: 'sva-notifications-center',
-  standalone: true,
   imports: [Alert, BreakLine],
   templateUrl: './notifications-center.html',
 })

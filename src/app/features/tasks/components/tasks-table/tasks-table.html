@@ -1,32 +1,32 @@
-<sva-button (click)="addRandomTask()" ariaLabel="Add random task">
-  Add random task
-</sva-button>
+<sva-accent-button (click)="addRandomTask()" ariaLabel="Add random task">
+  <sva-plus-circle-icon class="mr-2" /> Add Task</sva-accent-button
+>
 <sva-break-line />
 <sva-break-line />
 @if (loading()) {
   <sva-loader />
 } @else {
   <sva-table>
-    <th header id="id">Id</th>
-    <th header id="title">Title</th>
-    <th header id="description">Description</th>
-    <th header id="priority">Priority</th>
-    <th header id="status">Status</th>
-    <th header id="depends-on">Depends On</th>
-    <th header id="started-at">Started At</th>
-    <th header id="completed-at">Completed At</th>
-    <th header id="blocked-reason">Blocked Reason</th>
-    <th header id="schedule-action">Schedule</th>
-    <th header id="restart-action">Restart</th>
-    <th header id="cancel-action">Cancel</th>
+    <th header>Id</th>
+    <th header>Title</th>
+    <th header>Description</th>
+    <th header>Priority</th>
+    <th header>Status</th>
+    <th header>Depends On</th>
+    <th header>Started At</th>
+    <th header>Completed At</th>
+    <th header>Blocked Reason</th>
+    <th header>Schedule</th>
+    <th header>Restart</th>
+    <th header>Cancel</th>
 
     @if (tasks$ | async; as tasks) {
       @for (task of tasks; track task.id) {
         <tr>
-          <td [id]="task.id">{{ task.id }}</td>
+          <td class="text-center font-bold" [id]="task.id">{{ task.id }}</td>
           <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
-          <td>
+          <td class="w-36 text-center">
             <sva-badge
               [badgeColor]="getBadgeColorByPriority(task.priority)"
               [badgeSize]="BadgeSize.Medium"
@@ -34,7 +34,7 @@
               {{ getPriorityNameByValue(task.priority) }}
             </sva-badge>
           </td>
-          <td>
+          <td class="w-36 text-center">
             <sva-badge
               [badgeColor]="getBadgeColorByStatus(task.status)"
               [badgeSize]="BadgeSize.Medium"
@@ -55,9 +55,8 @@
             {{ task.completedAt | date: "MMM dd, yyyy 'at' hh:mm a" }}
           </td>
           <td>{{ task.blockReason }}</td>
-          <td class="border p-2 text-center">
+          <td class="w-20 text-center">
             <sva-button
-              [buttonType]="ButtonType.Primary"
               [buttonBehaviour]="
                 task.status !== Status.InProgress
                   ? ButtonBehaviour.Active
@@ -68,9 +67,8 @@
               <sva-calendar-days-icon />
             </sva-button>
           </td>
-          <td class="border p-2 text-center">
+          <td class="w-20 text-center">
             <sva-button
-              [buttonType]="ButtonType.Info"
               [buttonBehaviour]="
                 task.attempts <= 2 &&
                 (task.status === Status.Cancelled ||
@@ -83,9 +81,8 @@
               <sva-arrow-path-icon />
             </sva-button>
           </td>
-          <td class="border p-2 text-center">
+          <td class="w-20 text-center">
             <sva-button
-              [buttonType]="ButtonType.Error"
               [buttonBehaviour]="
                 task.status === Status.InProgress
                   ? ButtonBehaviour.Active
@@ -116,14 +113,10 @@
     <sva-date-input [(ngModel)]="startAtDate" ngDefaultControl />
     <div class="modal-action">
       <form method="dialog" class="flex w-full justify-between">
-        <sva-button
-          [buttonType]="ButtonType.Primary"
-          ariaLabel="Save task edition"
-          (click)="submitTaskEdition()">
+        <sva-button ariaLabel="Save task edition" (click)="submitTaskEdition()">
           Save
         </sva-button>
         <sva-button
-          [buttonType]="ButtonType.Ghost"
           ariaLabel="Cancel task edition"
           (click)="cancelTaskEdition()">
           Cancel

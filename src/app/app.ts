@@ -6,7 +6,6 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'sva-root',
-  standalone: true,
   imports: [RouterOutlet, Header, NotificationsCenter, Page],
   templateUrl: './app.html',
   styleUrl: './app.css',

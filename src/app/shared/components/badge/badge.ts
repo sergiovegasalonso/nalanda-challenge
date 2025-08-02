@@ -5,8 +5,6 @@ import { BadgeStyle } from '@shared/types/badge/badge-style.enum';
 
 @Component({
   selector: 'sva-badge',
-  standalone: true,
-  imports: [],
   templateUrl: './badge.html',
 })
 export class Badge {
