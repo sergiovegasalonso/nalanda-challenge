@@ -90,13 +90,13 @@ export class TasksTable implements OnInit, OnDestroy {
 
   addRandomTask(): void {
     this.tasksService.addRandomTask().subscribe({
-      next: (taskCreated) => {
+      next: taskCreated => {
         this.getTasks();
         this.notificationsService.showSuccess(
-          `Task #${taskCreated.id} created successfully`,
+          `Task #${taskCreated.id} created successfully`
         );
       },
-      error: (error) => {
+      error: error => {
         this.notificationsService.showError(error.message);
       },
     });
@@ -107,10 +107,10 @@ export class TasksTable implements OnInit, OnDestroy {
       next: () => {
         this.getTasks();
         this.notificationsService.showSuccess(
-          `Task #${taskId} cancelled successfully`,
+          `Task #${taskId} cancelled successfully`
         );
       },
-      error: (error) => {
+      error: error => {
         this.notificationsService.showError(error.message);
       },
     });
@@ -128,15 +128,15 @@ export class TasksTable implements OnInit, OnDestroy {
       .pipe(
         finalize(() => {
           this.getTasks();
-        }),
+        })
       )
       .subscribe({
         next: () => {
           this.notificationsService.showSuccess(
-            `Task #${taskId} completed successfully`,
+            `Task #${taskId} completed successfully`
           );
         },
-        error: (error) => {
+        error: error => {
           this.notificationsService.showError(error.message);
         },
       });
@@ -161,32 +161,32 @@ export class TasksTable implements OnInit, OnDestroy {
           this.taskToEdit.set(null);
           this.startAtDate.set(null);
           this.closeModal();
-        }),
+        })
       )
       .subscribe({
-        next: (updatedTask) => {
+        next: updatedTask => {
           if (updatedTask.startAt && updatedTask.startAt < new Date()) {
             this.tasksService
               .runTask(updatedTask.id)
               .pipe(
                 finalize(() => {
                   this.getTasks();
-                }),
+                })
               )
               .subscribe({
                 next: () => {
                   console.log('Task execution simulated successfully');
                   this.notificationsService.showSuccess(
-                    `Task #${updatedTask.id} completed successfully`,
+                    `Task #${updatedTask.id} completed successfully`
                   );
                 },
-                error: (error) => {
+                error: error => {
                   this.notificationsService.showError(error.message);
                 },
               });
           }
         },
-        error: (error) => {
+        error: error => {
           this.notificationsService.showError(error.message);
         },
       });
@@ -230,7 +230,7 @@ export class TasksTable implements OnInit, OnDestroy {
 
   getRelatedTaskNames(dependsOn: number[] | undefined): string {
     if (!dependsOn?.length) return '';
-    return dependsOn.map((id) => this.getTaskNameById(id)).join(', ');
+    return dependsOn.map(id => this.getTaskNameById(id)).join(', ');
   }
 
   getStatusNameByValue(value: number): string {
@@ -252,17 +252,17 @@ export class TasksTable implements OnInit, OnDestroy {
       .getAllTasks()
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
-        next: (tasks) => {
+        next: tasks => {
           this.tasksSubject.next(tasks);
         },
-        error: (error) => {
+        error: error => {
           this.notificationsService.showError(error.message);
         },
       });
   }
 
   private getTaskNameById(id: number): string {
-    const task = this.tasksSubject.value.find((t) => t.id === id);
+    const task = this.tasksSubject.value.find(t => t.id === id);
     return task ? `#${task.title}` : '';
   }
 

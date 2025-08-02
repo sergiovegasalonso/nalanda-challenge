@@ -37,7 +37,7 @@ describe('NotificationsCenter', () => {
     const notificationsService = TestBed.inject(NotificationsService);
     expect(notificationsService).toBeDefined();
     expect(component.notifications).toEqual(
-      notificationsService.notifications$,
+      notificationsService.notifications$
     );
   });
 });

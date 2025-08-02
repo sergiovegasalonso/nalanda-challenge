@@ -30,8 +30,7 @@
             <sva-badge
               [badgeColor]="getBadgeColorByPriority(task.priority)"
               [badgeSize]="BadgeSize.Medium"
-              [badgeStyle]="BadgeStyle.None"
-            >
+              [badgeStyle]="BadgeStyle.None">
               {{ getPriorityNameByValue(task.priority) }}
             </sva-badge>
           </td>
@@ -39,8 +38,7 @@
             <sva-badge
               [badgeColor]="getBadgeColorByStatus(task.status)"
               [badgeSize]="BadgeSize.Medium"
-              [badgeStyle]="BadgeStyle.None"
-            >
+              [badgeStyle]="BadgeStyle.None">
               {{ getStatusNameByValue(task.status) }}
               @if (task.status === Status.InProgress) {
                 <sva-loader [loaderSize]="LoaderSize.ExtraSmall" />
@@ -66,8 +64,7 @@
                   : ButtonBehaviour.Disabled
               "
               ariaLabel="Edit task start at date"
-              (click)="startTaskEdition(task)"
-            >
+              (click)="startTaskEdition(task)">
               <sva-calendar-days-icon />
             </sva-button>
           </td>
@@ -82,8 +79,7 @@
                   : ButtonBehaviour.Disabled
               "
               ariaLabel="Restart task"
-              (click)="runTask(task.id)"
-            >
+              (click)="runTask(task.id)">
               <sva-arrow-path-icon />
             </sva-button>
           </td>
@@ -96,8 +92,7 @@
                   : ButtonBehaviour.Disabled
               "
               ariaLabel="Cancel task"
-              (click)="cancelTask(task.id)"
-            >
+              (click)="cancelTask(task.id)">
               <sva-x-mark-icon />
             </sva-button>
           </td>
@@ -120,19 +115,17 @@
     <sva-break-line />
     <sva-date-input [(ngModel)]="startAtDate" ngDefaultControl />
     <div class="modal-action">
-      <form method="dialog" class="w-full flex justify-between">
+      <form method="dialog" class="flex w-full justify-between">
         <sva-button
           [buttonType]="ButtonType.Primary"
           ariaLabel="Save task edition"
-          (click)="submitTaskEdition()"
-        >
+          (click)="submitTaskEdition()">
           Save
         </sva-button>
         <sva-button
           [buttonType]="ButtonType.Ghost"
           ariaLabel="Cancel task edition"
-          (click)="cancelTaskEdition()"
-        >
+          (click)="cancelTaskEdition()">
           Cancel
         </sva-button>
       </form>

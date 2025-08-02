@@ -46,7 +46,7 @@ export class NotificationsService {
   }
 
   removeNotification(id: string): void {
-    this.notifications.set(this.notifications().filter((n) => n.id !== id));
+    this.notifications.set(this.notifications().filter(n => n.id !== id));
 
     if (this.notifications().length === 0) {
       this.stopCleanupInterval();
@@ -59,7 +59,7 @@ export class NotificationsService {
       const now = Date.now();
       const current = this.notifications();
       const filtered = current.filter(
-        (n) => now - n.timestamp < this.REFRESH_INTERVAL,
+        n => now - n.timestamp < this.REFRESH_INTERVAL
       );
 
       if (filtered.length !== current.length) {

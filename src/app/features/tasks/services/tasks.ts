@@ -142,7 +142,7 @@ export class TasksService {
   addRandomTask(): Observable<Task> {
     const priorities = [Priority.Low, Priority.Medium, Priority.High];
 
-    const existingIds = this.mockTasks.map((task) => task.id);
+    const existingIds = this.mockTasks.map(task => task.id);
     const newId = Math.max(...existingIds) + 1;
 
     const randomTask: Task = {
@@ -166,7 +166,7 @@ export class TasksService {
   }
 
   cancelTask(taskId: number): Observable<Task> {
-    const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
+    const taskIndex = this.mockTasks.findIndex(t => t.id === taskId);
 
     if (taskIndex === -1) {
       return throwError(() => new Error(`Task ${taskId} not found`));
@@ -200,19 +200,19 @@ export class TasksService {
 
   runTask(taskId: number): Observable<Task> {
     const runningTasks = this.mockTasks.filter(
-      (t) => t.status === Status.InProgress,
+      t => t.status === Status.InProgress
     );
 
     if (runningTasks.length >= this.MAX_CONCURRENT_TASKS) {
       return throwError(
         () =>
           new Error(
-            `Maximum of ${this.MAX_CONCURRENT_TASKS} tasks can run concurrently`,
-          ),
+            `Maximum of ${this.MAX_CONCURRENT_TASKS} tasks can run concurrently`
+          )
       );
     }
 
-    const taskIndex = this.mockTasks.findIndex((t) => t.id === taskId);
+    const taskIndex = this.mockTasks.findIndex(t => t.id === taskId);
 
     if (taskIndex === -1) {
       return throwError(() => new Error(`Task ${taskId} not found`));
@@ -223,17 +223,16 @@ export class TasksService {
     const allDependenciesCompleted =
       !targetTask.dependsOn?.length ||
       targetTask.dependsOn.every(
-        (depId) =>
-          this.mockTasks.find((t) => t.id === depId)?.status ===
-          Status.Completed,
+        depId =>
+          this.mockTasks.find(t => t.id === depId)?.status === Status.Completed
       );
 
     if (!allDependenciesCompleted) {
       return throwError(
         () =>
           new Error(
-            `Task ${taskId} cannot be started due to incomplete dependencies`,
-          ),
+            `Task ${taskId} cannot be started due to incomplete dependencies`
+          )
       );
     }
 
@@ -272,7 +271,7 @@ export class TasksService {
           this.mockTasks[taskIndex] = failedTask;
 
           return throwError(
-            () => new Error(`Task ${task.id} execution failed due to timeout`),
+            () => new Error(`Task ${task.id} execution failed due to timeout`)
           );
         }
 
@@ -291,7 +290,7 @@ export class TasksService {
           this.mockTasks[taskIndex] = failedTask;
 
           return throwError(
-            () => new Error(`Task ${task.id} execution failed randomly`),
+            () => new Error(`Task ${task.id} execution failed randomly`)
           );
         }
 
@@ -304,12 +303,12 @@ export class TasksService {
         this.mockTasks[taskIndex] = completedTask;
 
         return of(completedTask);
-      }),
+      })
     );
   }
 
   updateTask(task: Task): Observable<Task> {
-    const taskIndex = this.mockTasks.findIndex((t) => t.id === task.id);
+    const taskIndex = this.mockTasks.findIndex(t => t.id === task.id);
 
     if (taskIndex === -1) {
       return throwError(() => new Error(`Task ${task.id} not found`));

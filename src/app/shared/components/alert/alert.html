@@ -1,7 +1,6 @@
 <div
   role="alert"
-  [class]="`alert ${alertColor()} ${alertDirection()} ${alertStyle()}`"
->
+  [class]="`alert ${alertColor()} ${alertDirection()} ${alertStyle()}`">
   @switch (alertColor()) {
     @case (AlertColor.Error) {
       <sva-x-circle-icon />

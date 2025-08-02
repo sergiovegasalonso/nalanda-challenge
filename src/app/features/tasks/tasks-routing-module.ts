@@ -11,7 +11,7 @@ export const routes: Routes = [
     path: 'tasks/task-manager',
     title: 'Task Manager',
     loadComponent: () =>
-      import('./views/task-manager/task-manager').then((c) => c.TaskManager),
+      import('./views/task-manager/task-manager').then(c => c.TaskManager),
   },
 ];
 

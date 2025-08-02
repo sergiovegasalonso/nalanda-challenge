@@ -15,16 +15,6 @@
     "format": "npx prettier --write .",
     "prepare": "husky"
   },
-  "prettier": {
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
   "private": true,
   "dependencies": {
     "@angular/common": "^20.1.4",

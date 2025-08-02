@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -26,16 +26,16 @@
 @font-face {
   font-style: normal;
   font-weight: 400;
-  src: url("/src/assets/fonts/JetBrainsMono-Regular.ttf");
-  font-family: "JetBrains Mono", monospace;
+  src: url('/src/assets/fonts/JetBrainsMono-Regular.ttf');
+  font-family: 'JetBrains Mono', monospace;
   font-display: swap;
   font-optical-sizing: auto;
 }
 
 * {
   line-height: 1.5;
-  font-family: "JetBrains Mono", monospace;
-  font-variation-settings: "wdth" 100;
+  font-family: 'JetBrains Mono', monospace;
+  font-variation-settings: 'wdth' 100;
 }
 
 html.light {
