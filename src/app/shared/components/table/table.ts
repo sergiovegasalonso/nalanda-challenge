@@ -1,6 +1,4 @@
-import { Component, input } from '@angular/core';
-import { TableModifier } from '@shared/types/table/table-modifier.enum';
-import { TableSize } from '@shared/types/table/table-size.enum';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sva-table',
@@ -8,7 +6,4 @@ import { TableSize } from '@shared/types/table/table-size.enum';
   imports: [],
   templateUrl: './table.html',
 })
-export class Table {
-  tableModifier = input(TableModifier.None);
-  tableSize = input(TableSize.Medium);
-}
+export class Table {}

@@ -1,11 +1,14 @@
 <table
   class="shadow-md w-full border-collapse bg-light-foreground dark:bg-dark-foreground"
 >
-  <ng-content>
-    <thead>
-      <tr>
-        <th id="id">table fallback</th>
-      </tr>
-    </thead>
-  </ng-content>
+  <thead>
+    <tr class="[&_th]:p-2 [&_th]:border">
+      <ng-content select="[header]">
+        <th id="id">header fallback</th>
+      </ng-content>
+    </tr>
+  </thead>
+  <tbody class="[&_td]:border [&_td]:p-2">
+    <ng-content> body fallback </ng-content>
+  </tbody>
 </table>

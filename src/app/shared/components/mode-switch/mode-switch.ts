@@ -3,6 +3,7 @@ import { Mode } from './types/mode.enum';
 
 @Component({
   selector: 'sva-mode-switch',
+  standalone: true,
   imports: [],
   templateUrl: './mode-switch.html',
 })
