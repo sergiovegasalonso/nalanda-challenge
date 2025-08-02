@@ -8,17 +8,19 @@
   --color-black: oklch(0 0 0);
 
   --color-light-background: oklch(98.7% 0.022 95.277);
+  --color-light-foreground: var(--color-white);
   --color-light-background-highlighted: oklch(96.2% 0.059 95.617);
   --color-light-background-contrast: var(--color-black);
-  --color-light-accent: oklch(44.4% 0.177 26.899);
+  --color-light-accent: oklch(0.6473 0.04 344.8);
 
-  --color-dark-background: oklch(21.6% 0.006 56.043);
+  --color-dark-background: oklch(0.252 0 0);
+  --color-dark-foreground: oklch(0.3867 0 0);
   --color-dark-background-highlighted: oklch(37.4% 0.01 67.558);
   --color-dark-background-contrast: var(--color-white);
-  --color-dark-accent: oklch(89.7% 0.196 126.665);
+  --color-dark-accent: oklch(0.8403 0.1724 84.08);
 
   --shadow-*: initial;
-  --shadow-md: 0.2rem 0.2rem 0 0 var(--color-light-background-contrast);
+  --shadow-md: 0.2rem 0.2rem 0 0 var(--color-black);
 }
 
 @font-face {

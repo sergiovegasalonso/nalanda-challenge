@@ -1,8 +1,4 @@
-<sva-button
-  [buttonType]="ButtonType.Primary"
-  (click)="addRandomTask()"
-  ariaLabel="Add random task"
->
+<sva-button (click)="addRandomTask()" ariaLabel="Add random task">
   Add random task
 </sva-button>
 <sva-break-line />
@@ -27,9 +23,7 @@
         <th id="cancel-action" class="border p-2"></th>
       </tr>
     </thead>
-    <tbody
-      class="[&>*:nth-child(odd)]:bg-white [&>*:nth-child(even)]:bg-stone-300"
-    >
+    <tbody>
       @if (tasks$ | async; as tasks) {
         @for (task of tasks; track task.id) {
           <tr>
