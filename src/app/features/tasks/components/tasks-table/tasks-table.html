@@ -1,5 +1,7 @@
-<sva-accent-button (click)="addRandomTask()" ariaLabel="Add random task">
-  <sva-plus-circle-icon class="mr-2" /> Add Task</sva-accent-button
+<sva-accent-button (click)="addRandomTask()" [ariaLabel]="addTaskAriaLabel">
+  <sva-plus-circle-icon class="mr-2" /><span>{{
+    addTaskText
+  }}</span></sva-accent-button
 >
 <sva-break-line />
 <sva-break-line />
@@ -56,7 +58,7 @@
                   ? ButtonBehaviour.Active
                   : ButtonBehaviour.Disabled
               "
-              ariaLabel="Edit task start at date"
+              [ariaLabel]="scheduleTaskAriaLabel"
               (click)="startTaskEdition(task)">
               <sva-calendar-days-icon />
             </sva-button>
@@ -70,7 +72,7 @@
                   ? ButtonBehaviour.Active
                   : ButtonBehaviour.Disabled
               "
-              ariaLabel="Restart task"
+              [ariaLabel]="restartTaskAriaLabel"
               (click)="runTask(task.id)">
               <sva-arrow-path-icon />
             </sva-button>
@@ -82,7 +84,7 @@
                   ? ButtonBehaviour.Active
                   : ButtonBehaviour.Disabled
               "
-              ariaLabel="Cancel task"
+              [ariaLabel]="cancelTaskExecutionAriaLabel"
               (click)="cancelTask(task.id)">
               <sva-x-mark-icon />
             </sva-button>
@@ -107,13 +109,15 @@
     <sva-date-input [(ngModel)]="startAtDate" ngDefaultControl />
     <div class="modal-action">
       <form method="dialog" class="flex w-full justify-between">
-        <sva-button ariaLabel="Save task edition" (click)="submitTaskEdition()">
-          Save
+        <sva-button
+          [ariaLabel]="saveScheduleAriaLabel"
+          (click)="submitTaskEdition()">
+          {{ saveScheduleText }}
         </sva-button>
         <sva-button
-          ariaLabel="Cancel task edition"
+          [ariaLabel]="cancelScheduleAriaLabel"
           (click)="cancelTaskEdition()">
-          Cancel
+          {{ cancelScheduleText }}
         </sva-button>
       </form>
     </div>

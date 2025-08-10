@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="3258079620926437230" datatype="html">
+        <source>Add task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.html</context>
+          <context context-type="linenumber">4,9</context>
+        </context-group>
+        <note priority="1" from="description">A visible text to add a new task button:Add task</note>
+        <note priority="1" from="meaning">add task button text</note>
+      </trans-unit>
+      <trans-unit id="6359345717442084658" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.html</context>
+          <context context-type="linenumber">120,124</context>
+        </context-group>
+        <note priority="1" from="description">A visible name for the button to save the start
+            date of a task:Save</note>
+        <note priority="1" from="meaning">save schedule button</note>
+      </trans-unit>
+      <trans-unit id="3604197864692801673" datatype="html">
+        <source> Cancel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.html</context>
+          <context context-type="linenumber">129,135</context>
+        </context-group>
+        <note priority="1" from="description">A visible name for the button to cancel
+            editing the start date of a task:Cancel</note>
+        <note priority="1" from="meaning">cancel schedule button</note>
+      </trans-unit>
+      <trans-unit id="3543186260461528993" datatype="html">
+        <source>Add task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+        <note priority="1" from="description">An aria-label description to add a new task button</note>
+        <note priority="1" from="meaning">add task button aria</note>
+      </trans-unit>
+      <trans-unit id="1709372077124844074" datatype="html">
+        <source>Cancel scheduling</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <note priority="1" from="description">An aria label description for the button to cancel editing the start date of a task</note>
+        <note priority="1" from="meaning">cancel schedule button</note>
+      </trans-unit>
+      <trans-unit id="6908692908415613003" datatype="html">
+        <source>Cancel task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <note priority="1" from="description">An aria label description for the cancel button of a task</note>
+        <note priority="1" from="meaning">cancel task button</note>
+      </trans-unit>
+      <trans-unit id="6681017562643275190" datatype="html">
+        <source>Restart task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <note priority="1" from="description">An aria label description for the task restart button</note>
+        <note priority="1" from="meaning">restart task button</note>
+      </trans-unit>
+      <trans-unit id="3686766975890561130" datatype="html">
+        <source>Save scheduling</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <note priority="1" from="description">An aria label description for the button to save the start date of a task</note>
+        <note priority="1" from="meaning">save schedule button</note>
+      </trans-unit>
+      <trans-unit id="7079543192960356566" datatype="html">
+        <source>Schedule task start date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <note priority="1" from="description">An aria label description for the task start date scheduling button</note>
+        <note priority="1" from="meaning">schedule start date</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -9,7 +9,10 @@ El proyecto se puede probar ejecutando con ```npm install``` y ```npm start```, 
 
 ## pending tasks
 
-1. creating own neobrutalism design system (removing TailwindCSS and DaysiUI).
+0. meter i18n
+0. ir paso a paso por tasks table y mejorar todo lo relacionado
+0. hacer bonito el botón de cambio de tema
+
 2. rethinking solution.
 3. create solution as template.
 4. create my own JavaScript library while develop
