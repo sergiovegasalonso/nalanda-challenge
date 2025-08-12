@@ -1,6 +1,8 @@
-<sva-accent-button (click)="addRandomTask()" [ariaLabel]="addTaskAriaLabel">
+<sva-accent-button
+  (click)="addRandomTask()"
+  [ariaLabel]="add_Task__Translation">
   <sva-plus-circle-icon class="mr-2" /><span>{{
-    addTaskText
+    add_Task__Translation
   }}</span></sva-accent-button
 >
 <sva-break-line />
@@ -58,7 +60,7 @@
                   ? ButtonBehaviour.Active
                   : ButtonBehaviour.Disabled
               "
-              [ariaLabel]="scheduleTaskAriaLabel"
+              [ariaLabel]="modify_The_Task_Execution_Start_Date__Translation"
               (click)="startTaskEdition(task)">
               <sva-calendar-days-icon />
             </sva-button>
@@ -72,7 +74,7 @@
                   ? ButtonBehaviour.Active
                   : ButtonBehaviour.Disabled
               "
-              [ariaLabel]="restartTaskAriaLabel"
+              [ariaLabel]="restart_The_Task_Execution__Translation"
               (click)="runTask(task.id)">
               <sva-arrow-path-icon />
             </sva-button>
@@ -84,7 +86,7 @@
                   ? ButtonBehaviour.Active
                   : ButtonBehaviour.Disabled
               "
-              [ariaLabel]="cancelTaskExecutionAriaLabel"
+              [ariaLabel]="cancel_The_Task_Execution__Translation"
               (click)="cancelTask(task.id)">
               <sva-x-mark-icon />
             </sva-button>
@@ -110,14 +112,16 @@
     <div class="modal-action">
       <form method="dialog" class="flex w-full justify-between">
         <sva-button
-          [ariaLabel]="saveScheduleAriaLabel"
+          [ariaLabel]="modify_The_Task_Execution_Start_Date__Translation"
           (click)="submitTaskEdition()">
-          {{ saveScheduleText }}
+          {{ save__Translation }}
         </sva-button>
         <sva-button
-          [ariaLabel]="cancelScheduleAriaLabel"
+          [ariaLabel]="
+            cancel_The_Modification_Of_The_Task_Execution_Start_Date__Translation
+          "
           (click)="cancelTaskEdition()">
-          {{ cancelScheduleText }}
+          {{ cancel__Translation }}
         </sva-button>
       </form>
     </div>

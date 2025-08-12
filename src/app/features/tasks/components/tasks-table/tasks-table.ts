@@ -77,17 +77,13 @@ export class TasksTable implements OnInit, OnDestroy {
   tasks$ = this.tasksSubject.asObservable();
   taskToEdit = signal<Task | null>(null);
 
-  $localize = $localize;
-
-  addTaskAriaLabel = $localize`:add task button aria|An aria label description for a new task button:Add task`;
-  addTaskText = $localize`:add task button text|A visible text for a new task button:Add task`;
-  cancelScheduleAriaLabel = $localize`:cancel schedule button aria|An aria label description for the button to cancel editing the start date of a task:Cancel scheduling`;
-  cancelScheduleText = $localize`:cancel schedule button text|A visible text for the button to cancel editing the start date of a task:Cancel`;
-  cancelTaskExecutionAriaLabel = $localize`:cancel task button aria|An aria label description for the cancel button of a task:Cancel task`;
-  restartTaskAriaLabel = $localize`:restart task button aria|An aria label description for the task restart button:Restart task`;
-  saveScheduleAriaLabel = $localize`:save schedule button aria|An aria label description for the button to save the start date of a task:Save scheduling`;
-  saveScheduleText = $localize`:save schedule button text|A visible text for the button to save the start date of a task:Save`;
-  scheduleTaskAriaLabel = $localize`:schedule start button date aria|An aria label description for the task start date scheduling button:Schedule task start date`;
+  add_Task__Translation = $localize`:add task|Add task:Add task`;
+  cancel__Translation = $localize`:cancel|Cancel:Cancel`;
+  cancel_The_Modification_Of_The_Task_Execution_Start_Date__Translation = $localize`:cancel the modification of the task execution start date|Cancel the modification of the task execution start date:Cancel the modification of the task execution start date`;
+  cancel_The_Task_Execution__Translation = $localize`:cancel the task execution|Cancel the task execution:Cancel the task execution`;
+  modify_The_Task_Execution_Start_Date__Translation = $localize`:modify the task execution start date|Modify the task execution start date:Modify the task execution start date`;
+  restart_The_Task_Execution__Translation = $localize`:restart the task execution|Restart the task execution:Restart the task execution`;
+  save__Translation = $localize`:save|Save:Save`;
 
   ngOnInit() {
     this.getTasks();
