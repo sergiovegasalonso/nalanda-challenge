@@ -12,7 +12,7 @@
 } @else {
   <sva-table>
     <th header>Id</th>
-    <th header>Title</th>
+    <th header>{{ title__Translation }}</th>
     <th header>Description</th>
     <th header>Priority</th>
     <th header>Status</th>
@@ -95,7 +95,7 @@
       }
     } @else {
       <tr>
-        <td>There are no items.</td>
+        <td>{{ thereAreNoItems__Translation }}</td>
       </tr>
     }
   </sva-table>

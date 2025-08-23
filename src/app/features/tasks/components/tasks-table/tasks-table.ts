@@ -85,6 +85,9 @@ export class TasksTable implements OnInit, OnDestroy {
   restart_The_Task_Execution__Translation = $localize`:restart the task execution|Restart the task execution:Restart the task execution`;
   save__Translation = $localize`:save|Save:Save`;
 
+  thereAreNoItems__Translation = $localize`:there are no items|There are no items:There are no items`;
+  title__Translation = $localize`:title|Title:Title`;
+
   ngOnInit() {
     this.getTasks();
   }

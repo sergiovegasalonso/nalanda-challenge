@@ -1,7 +1,5 @@
 # sergio's scalable project
 
-// TODO
-
 ## description
 
 // TODO: when change domain
@@ -9,12 +7,14 @@ El proyecto se puede probar ejecutando con ```npm install``` y ```npm start```, 
 
 ## pending tasks
 
-0. meter i18n
 0. ir paso a paso por tasks table y mejorar todo lo relacionado
 0. hacer bonito el botón de cambio de tema
+0. meter botón translations
 
 2. rethinking solution.
-3. create solution as template.
+3. create solution as template
+
+crear un pipe para la transformación del link a las tareas
 4. create my own JavaScript library while develop
 5. SSR like sva lab
 6. Defers and incremental hydration

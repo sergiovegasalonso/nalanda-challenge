@@ -65,6 +65,24 @@
         <note priority="1" from="description">Save</note>
         <note priority="1" from="meaning">save</note>
       </trans-unit>
+      <trans-unit id="6425864013313806179" datatype="html">
+        <source>There are no items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <note priority="1" from="description">There are no items</note>
+        <note priority="1" from="meaning">there are no items</note>
+      </trans-unit>
+      <trans-unit id="2304976960639666708" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/tasks/components/tasks-table/tasks-table.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <note priority="1" from="description">Title</note>
+        <note priority="1" from="meaning">title</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
